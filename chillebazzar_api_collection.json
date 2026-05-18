@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "7a3b1d2e-4c5f-6a7b-8d9e-0f1a2b3c4d5e",
+		"name": "ChilleBazzar API - Master Manifest",
+		"description": "Exhaustive API collection for ChilleBazzar platform including 45+ endpoints. \n\n**Authentication**: Cookie-based (`accessToken`, `refreshToken`).\n**Base URL**: `http://localhost:5000/api/v1`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Core Pulse",
+			"description": "Basic system health and entry points.",
+			"item": [
+				{
+					"name": "Root Welcome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": [""]
+						},
+						"description": "API Root entry point. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["health"]
+						},
+						"description": "Verifies system uptime and database connectivity. \n**Access: Public**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Identity Ecosystem (Auth)",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Artisan Jane\",\n    \"email\": \"artisan@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"+94770000000\",\n    \"role\": \"farmer\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/auth/signup", "host": ["{{baseUrl}}"], "path": ["auth", "signup"] },
+						"description": "Create a new user, farmer, or admin identity. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"artisan@example.com\",\n    \"password\": \"password123\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+						"description": "Authenticate and receive secure HTTP-only cookies. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth", "refresh"] },
+						"description": "Rotate access tokens using the background refresh cookie. \n**Access: Public (Cookie Required)**"
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth", "logout"] },
+						"description": "Invalidate current session and clear server-side cookies. \n**Access: Authenticated**"
+					}
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] },
+						"description": "Retrieve deep profile data for the active session. \n**Access: Authenticated**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Artisan Profiles (Farmer)",
+			"item": [
+				{
+					"name": "Get My Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/farmer-profiles/me", "host": ["{{baseUrl}}"], "path": ["farmer-profiles", "me"] },
+						"description": "Retrieve the farmer profile associated with the current user. \n**Access: Authenticated**"
+					}
+				},
+				{
+					"name": "Get Profile by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/farmer-profiles/:id", "host": ["{{baseUrl}}"], "path": ["farmer-profiles", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Lookup an artisan's public storefront data. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Create Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"farmName\": \"Green Valley Organics\",\n    \"description\": \"Dedicated to pesticide-free agriculture.\",\n    \"location\": \"Matara, Sri Lanka\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/farmer-profiles", "host": ["{{baseUrl}}"], "path": ["farmer-profiles"] },
+						"description": "Initialize a farmer's marketplace identity. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": { "mode": "raw", "raw": "{\n    \"description\": \"New description...\"\n}", "options": { "raw": { "language": "json" } } },
+						"url": { "raw": "{{baseUrl}}/farmer-profiles/:id", "host": ["{{baseUrl}}"], "path": ["farmer-profiles", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Modify store profile details. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Delete Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/farmer-profiles/:id", "host": ["{{baseUrl}}"], "path": ["farmer-profiles", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Permanently remove a farmer profile. \n**Access: FARMER Only**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Listing Matrix (Product)",
+			"item": [
+				{
+					"name": "Global Product Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+						"description": "Retrieve all live listings in the marketplace. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Farmer Inventory Lookup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/products/farmer", "host": ["{{baseUrl}}"], "path": ["products", "farmer"] },
+						"description": "Fetch inventory owned by the active farmer. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Product Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Get deep data for a single listing. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Add Listing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{ "key": "name", "value": "Fresh Mangoes", "type": "text" },
+								{ "key": "price", "value": "500", "type": "text" },
+								{ "key": "stock", "value": "100", "type": "text" },
+								{ "key": "category", "value": "Fruits", "type": "text" },
+								{ "key": "images", "type": "file", "src": [] }
+							]
+						},
+						"url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+						"description": "Create a new harvest listing. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Refine Listing",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": { "mode": "formdata", "formdata": [{ "key": "price", "value": "450", "type": "text" }] },
+						"url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Update price, stock, or details of a listing. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Retire Listing",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Scrub a product from the registry. \n**Access: FARMER Only**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Transaction Stream (Order)",
+			"item": [
+				{
+					"name": "Initialize Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [{ \"productId\": \"...\", \"quantity\": 1 }],\n    \"shippingAddress\": \"123 Matara Rd\",\n    \"paymentMethod\": \"card\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] },
+						"description": "Create a new marketplace order. \n**Access: USER Only**"
+					}
+				},
+				{
+					"name": "Get My Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/orders/mine", "host": ["{{baseUrl}}"], "path": ["orders", "mine"] },
+						"description": "Customer transaction history. \n**Access: USER Only**"
+					}
+				},
+				{
+					"name": "Logistics State Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": { "mode": "raw", "raw": "{\n    \"status\": \"SHIPPED\"\n}", "options": { "raw": { "language": "json" } } },
+						"url": { "raw": "{{baseUrl}}/orders/:id/status", "host": ["{{baseUrl}}"], "path": ["orders", ":id", "status"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Transition order through fulfillment stages. \n**Access: FARMER Only**"
+					}
+				},
+				{
+					"name": "Get Specific Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/orders/:id", "host": ["{{baseUrl}}"], "path": ["orders", ":id"], "variable": [{"key": "id", "value": ""}] },
+						"description": "Detailed transaction audit. \n**Access: FARMER/USER**"
+					}
+				}
+			]
+		},
+		{
+			"name": "User Governance",
+			"item": [
+				{
+					"name": "Refine My Data",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": { "mode": "raw", "raw": "{\n    \"name\": \"Artisan J.\"\n}", "options": { "raw": { "language": "json" } } },
+						"url": { "raw": "{{baseUrl}}/users/me", "host": ["{{baseUrl}}"], "path": ["users", "me"] },
+						"description": "Update personal profile information. \n**Access: Authenticated**"
+					}
+				},
+				{
+					"name": "Global User Registry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+						"description": "Administrative list of all platform members. \n**Access: ADMIN Only**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin Intelligence",
+			"item": [
+				{
+					"name": "Platform Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/admin/stats", "host": ["{{baseUrl}}"], "path": ["admin", "stats"] },
+						"description": "High-level platform activity audit. \n**Access: ADMIN Only**"
+					}
+				},
+				{
+					"name": "Security Action Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/admin/audit-logs", "host": ["{{baseUrl}}"], "path": ["admin", "audit-logs"] },
+						"description": "Full chronological audit of sensitive events. \n**Access: ADMIN Only**"
+					}
+				},
+				{
+					"name": "Order Surveillance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/admin/orders", "host": ["{{baseUrl}}"], "path": ["admin", "orders"] },
+						"description": "Platform-wide transaction monitoring. \n**Access: ADMIN Only**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Cart Sync",
+			"item": [
+				{
+					"name": "State Snapshot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/cart", "host": ["{{baseUrl}}"], "path": ["cart"] },
+						"description": "Current active cart contents. \n**Access: Authenticated**"
+					}
+				},
+				{
+					"name": "Sync Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": { "mode": "raw", "raw": "{\n    \"productId\": \"...\",\n    \"quantity\": 1\n}", "options": { "raw": { "language": "json" } } },
+						"url": { "raw": "{{baseUrl}}/cart", "host": ["{{baseUrl}}"], "path": ["cart"] },
+						"description": "Add/update item in session cart. \n**Access: Authenticated**"
+					}
+				},
+				{
+					"name": "Flush Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/cart", "host": ["{{baseUrl}}"], "path": ["cart"] },
+						"description": "Nuclear cart reset. \n**Access: Authenticated**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Feedback Loops",
+			"item": [
+				{
+					"name": "Product Review Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/reviews/product/:productId", "host": ["{{baseUrl}}"], "path": ["reviews", "product", ":productId"], "variable": [{"key": "productId", "value": ""}] },
+						"description": "Public feedback for a listing. \n**Access: Public**"
+					}
+				},
+				{
+					"name": "Submit Feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": { "mode": "raw", "raw": "{\n    \"productId\": \"...\",\n    \"rating\": 5,\n    \"comment\": \"Excellent quality!\"\n}", "options": { "raw": { "language": "json" } } },
+						"url": { "raw": "{{baseUrl}}/reviews", "host": ["{{baseUrl}}"], "path": ["reviews"] },
+						"description": "Authentic shopper review entry. \n**Access: USER Only**"
+					}
+				}
+			]
+		},
+		{
+			"name": "Financial Rails",
+			"item": [
+				{
+					"name": "Sync Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/payments/webhook", "host": ["{{baseUrl}}"], "path": ["payments", "webhook"] },
+						"description": "Internal Stripe synchronization entry. \n**Access: Public (Signature Required)**"
+					}
+				},
+				{
+					"name": "Initialize Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/payments/create-checkout-session/:orderId", "host": ["{{baseUrl}}"], "path": ["payments", "create-checkout-session", ":orderId"], "variable": [{"key": "orderId", "value": ""}] },
+						"description": "Stripe Hosted Checkout initialization. \n**Access: USER Only**"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		}
+	]
+}

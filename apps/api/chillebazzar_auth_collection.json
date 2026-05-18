@@ -1,0 +1,947 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-4a5b-8c9d-abcdef123456",
+		"name": "ChilleBazzar API",
+		"description": "Comprehensive Postman collection for ChilleBazzar API including Authentication, User Management, Farmer Profiles, and Audit Logging.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "General [PUBLIC]",
+			"item": [
+				{
+					"name": "Health Check [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/../../health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"..",
+								"..",
+								"health"
+							]
+						},
+						"description": "Check if the API server is healthy."
+					},
+					"response": []
+				},
+				{
+					"name": "Root Route [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/../..",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"..",
+								".."
+							]
+						},
+						"description": "API Root welcome message."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication [PUBLIC]",
+			"item": [
+				{
+					"name": "Signup [PUBLIC]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-super-admin-token",
+								"value": "YOUR_SUPER_ADMIN_TOKEN_HERE",
+								"description": "Required only for admin signup",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"1234567890\",\n    \"role\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						},
+						"description": "Public access. Creates a new user account."
+					},
+					"response": []
+				},
+				{
+					"name": "Login [PUBLIC]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Public access. Returns access and refresh tokens."
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token [PUBLIC]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout [AUTHENTICATED]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me (Protected) [AUTHENTICATED]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						},
+						"description": "Returns details for the currently logged-in user."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Farmer Profiles [FARMER]",
+			"item": [
+				{
+					"name": "Create Profile [FARMER]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"farmName\": \"Green Acres\",\n    \"description\": \"Organic vegetable farm in the valley.\",\n    \"address\": \"123 Valley Road, Green City\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/farmer-profiles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"farmer-profiles"
+							]
+						},
+						"description": "Requires farmer role. Creates a profile for the logged-in user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Profile [FARMER]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/farmer-profiles/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"farmer-profiles",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile By ID [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/farmer-profiles/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"farmer-profiles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile [AUTHENTICATED]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"farmName\": \"Updated Farm Name\",\n    \"address\": \"456 New Location St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/farmer-profiles/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"farmer-profiles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile [FARMER]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/farmer-profiles/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"farmer-profiles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users [ADMIN/USER]",
+			"item": [
+				{
+					"name": "Get All Users [ADMIN]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Admin only. Returns all registered users."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID [ADMIN]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Admin only. Returns a specific user by ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User [ADMIN]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"farmer\",\n    \"isActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Admin only. Update user details (role, status, etc.)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User [ADMIN]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Admin only. Permanently deletes a user."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Audit Logs [ADMIN]",
+			"item": [
+				{
+					"name": "Get All Audit Logs [ADMIN]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/audit-logs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"audit-logs"
+							]
+						},
+						"description": "Admin only. Returns a history of all sensitive actions in the system."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products [FARMER/PUBLIC]",
+			"item": [
+				{
+					"name": "Get All Products [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By ID [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Public access."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product [FARMER]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productName",
+									"value": "Organic Tomatoes",
+									"type": "text"
+								},
+								{
+									"key": "productDescription",
+									"value": "Fresh farm tomatoes.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5.99",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "productType",
+									"value": "produce",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "INSERT_CATEGORY_ID_HERE",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "Farmer only. Requires form-data body for image upload (field 'images')."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product [FARMER]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productName",
+									"value": "Updated Tomatoes",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "6.50",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Farmer owner only. Replaces existing images if new ones are uploaded."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product [FARMER]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Farmer owner only. Deletes the product and all its images from Cloudinary."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders [USER/FARMER]",
+			"item": [
+				{
+					"name": "Create Order [USER]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"product\": \"INSERT_PRODUCT_ID_HERE\",\n            \"quantity\": 2\n        }\n    ],\n    \"deliveryAddress\": \"123 Green St, Harvest City\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders"]
+						},
+						"description": "User only. Creates a new order with auto-pricing."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders [USER/FARMER]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders"]
+						},
+						"description": "Returns all orders. Users only see their own."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Orders [USER]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders/user/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "User only. Fetches orders placed by a specific user. (Ownership check applied)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By ID [USER/FARMER]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order [FARMER]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deliveryAddress\": \"456 Updated Address\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Farmer only."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order Status [FARMER]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"prepearing\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders/:id/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Farmer only. Valid statuses: pending, prepearing, delivering, completed, cancelled."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order [FARMER]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Farmer only."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews [USER/PUBLIC]",
+			"item": [
+				{
+					"name": "Create Review [USER]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"INSERT_PRODUCT_ID_HERE\",\n    \"rating\": 5,\n    \"review\": \"Excellent product, very fresh!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reviews",
+							"host": ["{{baseUrl}}"],
+							"path": ["reviews"]
+						},
+						"description": "User only. Requires a COMPLETED order for this product."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Reviews [PUBLIC]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/product/:productId",
+							"host": ["{{baseUrl}}"],
+							"path": ["reviews", "product", ":productId"],
+							"variable": [
+								{
+									"key": "productId",
+									"value": ""
+								}
+							]
+						},
+						"description": "Public access. Returns all reviews for a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review [USER]",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 4,\n    \"review\": \"Updated: Still good but slightly different batch.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reviews/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["reviews", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "User owner only."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review [USER]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["reviews", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "User owner only."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments [USER/PUBLIC]",
+			"item": [
+				{
+					"name": "Create Checkout Session [USER]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/payments/create-checkout-session/:orderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payments",
+								"create-checkout-session",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": ""
+								}
+							]
+						},
+						"description": "User only. Generates a secure Stripe Checkout URL for an unpaid order."
+					},
+					"response": []
+				},
+				{
+					"name": "Stripe Webhook [PUBLIC]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "stripe-signature",
+								"value": "SIGNATURE_HERE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"checkout.session.completed\",\n    \"data\": {\n        \"object\": {\n            \"id\": \"cs_test_123\",\n            \"metadata\": {\n                \"orderId\": \"ORDER_ID_HERE\"\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payments/webhook",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payments",
+								"webhook"
+							]
+						},
+						"description": "Public (Stripe Only). Automatically updates order to 'paid' when payment succeeds."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		}
+	]
+}
