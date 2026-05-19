@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 const connectDB = async (): Promise<void> => {
   try {
     const mongoUri =
-      "mongodb://nalinrox125_db_user:jBNqxv9sMfORflEq@ac-a9utmhm-shard-00-00.skquzj7.mongodb.net:27017,ac-a9utmhm-shard-00-01.skquzj7.mongodb.net:27017,ac-a9utmhm-shard-00-02.skquzj7.mongodb.net:27017/EarthBound?ssl=true&authSource=admin&replicaSet=atlas-vvzyi5-shard-0";
+      process.env.MONGO_URI || "mongodb://localhost:27017/chillebazzar";
 
     const conn = await mongoose.connect(mongoUri);
 
