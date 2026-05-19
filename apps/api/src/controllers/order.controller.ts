@@ -68,7 +68,7 @@ export const createOrder = catchAsync(async (req: Request, res: Response, next: 
           sendEmail({
             email: dbUser.email,
             subject: "Your Order is Placed! — WoodenGallery",
-            message: `Hello ${dbUser.name},\n\nThank you for your order! We have successfully received your order #${order._id}.\n\nExplore status: ${process.env.CLIENT_URL || 'http://localhost:3000'}/profile/orders`,
+            message: `Hello ${dbUser.name},\n\nThank you for your order! We have successfully received your order #${order._id}.\n\nExplore status: ${process.env.CLIENT_URL || 'http://127.0.0.1:5000'}/profile/orders`,
             html: generateOrderPlacedTemplate(dbUser.name, order._id.toString(), totalPrice, orderItems),
           }).catch(err => console.error("❌ Order Placement Email Error:", err));
         }

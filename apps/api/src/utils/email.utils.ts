@@ -73,7 +73,7 @@ export const generateWelcomeTemplate = (userName: string) => {
           Whether you are exploring customized gallery sculptures, custom tabletop carvings, or modern organic panels, each item is sustainably sourced and carefully hand-seasoned to perfection by our master artisans.
         </p>
         <div style="margin: 30px 0; text-align: center;">
-          <a href="${process.env.CLIENT_URL || 'http://localhost:3000'}/shop" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
+          <a href="${process.env.CLIENT_URL || 'http://127.0.0.1:5000'}/shop" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
             Explore the Collections
           </a>
         </div>
@@ -136,7 +136,7 @@ export const generateOrderPlacedTemplate = (
         </p>
 
         <div style="margin: 30px 0; text-align: center;">
-          <a href="${process.env.CLIENT_URL || 'http://localhost:3000'}/profile/orders" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
+          <a href="${process.env.CLIENT_URL || 'http://127.0.0.1:5000'}/profile/orders" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
             Track My Order
           </a>
         </div>
@@ -179,7 +179,7 @@ export const generatePaymentVerifiedTemplate = (
         </p>
 
         <div style="margin: 30px 0; text-align: center;">
-          <a href="${process.env.CLIENT_URL || 'http://localhost:3000'}/profile/orders" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
+          <a href="${process.env.CLIENT_URL || 'http://127.0.0.1:5000'}/profile/orders" style="display: inline-block; background-color: #6D5543; color: #FAF9F6; font-size: 13px; font-weight: bold; text-decoration: none; padding: 16px 36px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(109, 85, 67, 0.2);">
             View Order Status
           </a>
         </div>

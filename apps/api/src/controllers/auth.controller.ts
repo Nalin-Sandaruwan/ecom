@@ -84,7 +84,7 @@ const baseSignup = async (
     sendEmail({
       email: user.email,
       subject: "Welcome to WoodenGallery!",
-      message: `Hello ${user.name},\n\nThank you for signing up to WoodenGallery! We are thrilled to welcome you to our curated sanctuary of premium, minimalist wood art handcrafted in Sri Lanka.\n\nExplore our collections here: ${process.env.CLIENT_URL || 'http://localhost:3000'}/shop`,
+      message: `Hello ${user.name},\n\nThank you for signing up to WoodenGallery! We are thrilled to welcome you to our curated sanctuary of premium, minimalist wood art handcrafted in Sri Lanka.\n\nExplore our collections here: ${process.env.CLIENT_URL || 'http://127.0.0.1:5000'}/shop`,
       html: generateWelcomeTemplate(user.name),
     }).catch(err => console.error("❌ Background Welcome Email Error:", err));
   } catch (err) {
