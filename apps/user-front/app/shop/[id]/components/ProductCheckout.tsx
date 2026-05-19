@@ -50,7 +50,7 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
               LKR {product.price.toFixed(2)}
             </span>
             <span className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest">
-              Inclusive of harvest tax
+              Handcrafted in Sri Lanka
             </span>
           </div>
 

@@ -172,10 +172,6 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
             </span>
             <span>4-5 business days</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground font-medium">Estimated Tax</span>
-            <span className="font-bold tabular-nums">LKR {tax.toFixed(2)}</span>
-          </div>
           <div className="border-t border-border/20 pt-4 mt-2">
             <div className="flex justify-between text-lg items-end">
               <span className="font-bold">Total</span>
@@ -287,7 +283,7 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
           <p className="text-[10px] text-muted-foreground text-center leading-relaxed px-4 pt-2">
             Secure and encrypted payments.
             <br />
-            Complimentary shipping over LKR 50.
+            Flat delivery fee of LKR 1,800 Islandwide.
           </p>
         </div>
       </div>

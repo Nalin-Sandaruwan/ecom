@@ -30,7 +30,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       toast.success("Login successful!");
       queryClient.invalidateQueries({ queryKey: ["me"] });
-      router.push("/"); // Redirect to home on success
+      router.push("/shop"); // Redirect to shop on success
     },
     onError: (error) => {
       const message =

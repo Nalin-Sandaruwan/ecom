@@ -21,8 +21,8 @@ export default function CartPage() {
     }, 0);
   }, [items]);
 
-  const shipping = subtotal > 50 ? 0 : 10;
-  const tax = subtotal * 0.08;
+  const shipping = 1800;
+  const tax = 0;
   const total = subtotal + shipping + tax;
 
   if (items.length === 0 && !isLoading) {

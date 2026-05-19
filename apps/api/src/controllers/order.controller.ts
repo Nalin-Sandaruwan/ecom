@@ -19,7 +19,7 @@ export const createOrder = catchAsync(async (req: Request, res: Response, next: 
 
   // 1. Initial validation pass - Check all products first
   const orderItems: any[] = [];
-  let totalPrice = 0;
+  let totalPrice = 1800; // Starting with a flat delivery fee of 1800 LKR
 
   for (const item of items) {
     const product = await Product.findById(item.product);
