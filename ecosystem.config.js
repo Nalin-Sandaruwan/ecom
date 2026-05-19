@@ -6,7 +6,6 @@ module.exports = {
       cwd: "/var/www/woodengallery",
       env_file: "/var/www/woodengallery/apps/api/.env",
       env: {
-        NODE_ENV: "production",
         PORT: 5000
       }
     },
