@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create a globally configured Axios instance
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000/api/v1",
   withCredentials: true, // Crucial for sending setting HTTP-Only cookies automatically
 });
 
