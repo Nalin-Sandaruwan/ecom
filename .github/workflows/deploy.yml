@@ -41,6 +41,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "${{ secrets.VPS_IP }}" >> ~/.ssh/known_hosts
 
+      - name: 🧹 Clean Old Server Build Files
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} "
+            rm -rf /var/www/woodengallery/apps/user-front/.next
+          "
+
       - name: 🚚 Deploy Production Assets via Rsync
         run: |
           # Sync only production necessary files, excluding heavy folders like node_modules and cache.
