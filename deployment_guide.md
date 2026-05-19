@@ -31,18 +31,18 @@ Connect to your Hostinger VPS via SSH as `root` (or a sudo user):
 ssh root@YOUR_VPS_IP
 ```
 
-Run the following commands to update the system and install **Node.js 18**, **Nginx**, **Git**, and **Certbot (SSL)**:
+Run the following commands to update the system and install **Node.js 20**, **Nginx**, **Git**, and **Certbot (SSL)**:
 
 ```bash
 # 1. Update system packages
 sudo apt update && sudo apt upgrade -y
 
 # 2. Install Node.js (via NodeSource)
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 
 # 3. Verify installations
-node -v  # Should be v18.x
+node -v  # Should be v20.x
 npm -v   # Verify npm is installed
 
 # 4. Install PM2 (Process Manager) globally
