@@ -39,7 +39,4 @@ const CartSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-// Indexing userId for faster lookup
-CartSchema.index({ userId: 1 });
-
 export default mongoose.model<ICart>("Cart", CartSchema);
