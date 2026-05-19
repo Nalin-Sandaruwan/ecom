@@ -53,12 +53,12 @@ jobs:
             --exclude 'apps/user-front/components/' \
             --exclude 'apps/user-front/lib/' \
             --exclude 'apps/api/src/' \
-            ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/var/www/chillebazzar
+            ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/var/www/woodengallery
 
       - name: 🔄 Post-Deploy PM2 App Restart
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} "
-            cd /var/www/chillebazzar && \
+            cd /var/www/woodengallery && \
             npm ci --omit=dev && \
             pm2 startOrReload ecosystem.config.js --update-env
           "
