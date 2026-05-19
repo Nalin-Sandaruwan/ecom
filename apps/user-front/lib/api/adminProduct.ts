@@ -7,7 +7,7 @@ export interface AdminProduct {
   price: number;
   quantity: number;
   imageURIs: string[];
-  certificateURIs: string[];
+  certificateURIs?: string[];
   productType: string;
   farmerId: {
     _id: string;

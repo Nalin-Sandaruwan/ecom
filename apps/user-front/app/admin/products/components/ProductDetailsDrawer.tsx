@@ -10,10 +10,8 @@ import { cn } from "@/lib/utils";
 
 // Sub-components
 import { ProductMetrics } from "./ProductMetrics";
-import { ProductCertifications } from "./ProductCertifications";
 import { FarmerAttribution } from "./FarmerAttribution";
 import { AdministrativeOversight } from "./AdministrativeOversight";
-import { CertificateLightbox } from "./CertificateLightbox";
 
 interface ProductDetailsDrawerProps {
   product: AdminProduct | null;
@@ -24,7 +22,7 @@ interface ProductDetailsDrawerProps {
 export const ProductDetailsDrawer = ({ product, open, onOpenChange }: ProductDetailsDrawerProps) => {
   const { mutate: deleteProduct, isPending: isDeleting } = useDeleteAdminProduct();
   const { mutate: approveProduct, isPending: isApproving } = useApproveAdminProduct();
-  const [selectedCert, setSelectedCert] = React.useState<string | null>(null);
+
 
   if (!product) return null;
 
@@ -124,10 +122,7 @@ export const ProductDetailsDrawer = ({ product, open, onOpenChange }: ProductDet
 
             <hr className="border-border/10" />
 
-            {/* 2. Product Certifications: Visual Audit Gallery */}
-            <ProductCertifications product={product} onViewCert={setSelectedCert} />
 
-            <hr className="border-border/10" />
 
             {/* 3. Farmer Attribution: Profile & Contact Info */}
             <FarmerAttribution product={product} />
@@ -144,11 +139,7 @@ export const ProductDetailsDrawer = ({ product, open, onOpenChange }: ProductDet
         </div>
       </DrawerContent>
 
-      {/* Lightbox for large image viewing */}
-      <CertificateLightbox
-        selectedCert={selectedCert}
-        onClose={() => setSelectedCert(null)}
-      />
+
     </Drawer>
   );
 };

@@ -11,33 +11,14 @@ interface ProductInfoProps {
     name: string;
     email: string;
   };
-  certificates?: string[];
 }
-
-import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
 
 export default function ProductInfo({
   productName,
   categoryName,
   description,
   farmer,
-  certificates,
 }: ProductInfoProps) {
-  const [selectedCert, setSelectedCert] = useState<string | null>(null);
-
-  // Prevent scroll when preview is open
-  useEffect(() => {
-    if (selectedCert) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [selectedCert]);
   return (
     <div className="space-y-8">
       {/* Product Header */}
@@ -95,83 +76,7 @@ export default function ProductInfo({
         </p>
       </motion.div>
 
-      {/* Certificates Showcase */}
-      {certificates && certificates.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="space-y-4 pt-4 border-t border-border/10"
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/80">Quality Certificates</span>
-            <div className="h-px flex-grow bg-border/20" />
-          </div>
-          
-          <div className="flex flex-wrap gap-4">
-            {certificates.map((cert, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCert(cert)}
-                className="group relative w-20 h-20 rounded-2xl border border-border/40 bg-muted/20 overflow-hidden cursor-pointer shadow-sm hover:border-primary/40 hover:shadow-md transition-all"
-              >
-                <img 
-                  src={cert} 
-                  alt={`Certificate ${index + 1}`} 
-                  className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
-                />
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-[8px] font-bold uppercase text-primary-foreground bg-primary px-2 py-0.5 rounded-full shadow-lg">View</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
 
-      {/* Lightbox Preview */}
-      <AnimatePresence>
-        {selectedCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/80 backdrop-blur-2xl p-4 sm:p-10"
-            onClick={() => setSelectedCert(null)}
-          >
-            <motion.button
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-[10000]"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedCert(null);
-              }}
-            >
-              <X className="w-6 h-6" />
-            </motion.button>
-
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full h-full max-h-[80vh] flex items-center justify-center"
-            >
-              <img
-                src={selectedCert}
-                alt="Certificate Full Preview"
-                className="max-w-full max-h-full object-contain rounded-3xl shadow-2xl border border-border/40 bg-muted/10"
-              />
-              <div className="absolute -bottom-10 left-0 right-0 text-center">
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60">Official Verification Document</span>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

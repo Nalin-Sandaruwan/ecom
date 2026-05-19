@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllOrders, updateOrderStatus } from "../api/order";
+import { getAllOrders, updateOrderStatus, updateOrderDetails } from "../api/order";
 import { toast } from "sonner";
 
 export const useFarmerOrders = () => {
@@ -26,11 +26,26 @@ export const useFarmerOrders = () => {
     },
   });
 
+  const updateOrderMutation = useMutation({
+    mutationFn: ({ orderId, trackingNumber, paymentStatus }: { orderId: string; trackingNumber?: string; paymentStatus?: string }) =>
+      updateOrderDetails(orderId, { trackingNumber, paymentStatus }),
+    onSuccess: () => {
+      toast.success("Order updated successfully!");
+      queryClient.invalidateQueries({ queryKey: ["farmer-orders"] });
+    },
+    onError: (error: any) => {
+      const message = error.response?.data?.message || "Failed to update order";
+      toast.error(message);
+    },
+  });
+
   return {
     orders: ordersQuery.data || [],
     isLoading: ordersQuery.isLoading,
     error: ordersQuery.error,
     updateStatus: updateStatusMutation.mutate,
     isUpdating: updateStatusMutation.isPending,
+    updateOrder: updateOrderMutation.mutate,
+    isUpdatingOrder: updateOrderMutation.isPending,
   };
 };

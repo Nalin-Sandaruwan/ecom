@@ -53,7 +53,6 @@ type ProductFormValues = z.infer<typeof productSchema>;
 function CreateProductDialog({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
-  const [selectedCertificates, setSelectedCertificates] = useState<FileList | null>(null);
   const { mutate: createProduct, isPending } = useCreateProduct();
   const { data: categories, isLoading: isLoadingCats } = useCategories();
 
@@ -90,18 +89,13 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (selectedCertificates) {
-      for (let i = 0; i < selectedCertificates.length; i++) {
-        formData.append("certificates", selectedCertificates[i]);
-      }
-    }
+
 
     createProduct(formData, {
       onSuccess: () => {
         setOpen(false);
         reset();
         setSelectedImages(null);
-        setSelectedCertificates(null);
       },
     });
   };
@@ -245,89 +239,45 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Image Upload */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="images" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <ImageIcon className="w-3.5 h-3.5" /> Product Images (up to 2)
-              </Label>
-              <div className="relative group cursor-pointer">
-                <input
-                  type="file"
-                  id="images"
-                  multiple
-                  accept="image/*"
-                  onChange={(e) => setSelectedImages(e.target.files)}
-                  className="hidden"
-                />
-                <Label
-                  htmlFor="images"
+          <div className="space-y-2">
+            <Label htmlFor="images" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
+              <ImageIcon className="w-3.5 h-3.5" /> Product Images (up to 2)
+            </Label>
+            <div className="relative group cursor-pointer">
+              <input
+                type="file"
+                id="images"
+                multiple
+                accept="image/*"
+                onChange={(e) => setSelectedImages(e.target.files)}
+                className="hidden"
+              />
+              <Label
+                htmlFor="images"
+                className={cn(
+                  "flex flex-col items-center justify-center w-full h-32 rounded-3xl border-2 border-dashed transition-all cursor-pointer",
+                  selectedImages
+                    ? "border-green-500/50 bg-green-500/5"
+                    : "border-border/40 bg-background/20 hover:bg-primary/5 hover:border-primary/40"
+                )}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className={cn(
-                    "flex flex-col items-center justify-center w-full h-32 rounded-3xl border-2 border-dashed transition-all cursor-pointer",
-                    selectedImages
-                      ? "border-green-500/50 bg-green-500/5"
-                      : "border-border/40 bg-background/20 hover:bg-primary/5 hover:border-primary/40"
+                    "flex flex-col items-center gap-2",
+                    selectedImages ? "text-green-600" : "text-muted-foreground"
                   )}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={cn(
-                      "flex flex-col items-center gap-2",
-                      selectedImages ? "text-green-600" : "text-muted-foreground"
-                    )}
-                  >
-                    {selectedImages ? <CheckCircle2 className="w-6 h-6" /> : <Plus className="w-5 h-5" />}
-                    <div className="flex flex-col items-center">
-                      <span className="text-[10px] text-center px-4 font-bold uppercase tracking-wide">
-                        {selectedImages ? `${selectedImages.length} Images Added Successfully` : "Select artisanal visuals"}
-                      </span>
-                      <span className="text-[8px] font-medium text-muted-foreground/60 uppercase tracking-[0.2em] mt-1">Images only</span>
-                    </div>
-                  </motion.div>
-                </Label>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="certificates" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <FileText className="w-3.5 h-3.5" /> Quality Certificates (up to 2)
+                  {selectedImages ? <CheckCircle2 className="w-6 h-6" /> : <Plus className="w-5 h-5" />}
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] text-center px-4 font-bold uppercase tracking-wide">
+                      {selectedImages ? `${selectedImages.length} Images Added Successfully` : "Select artisanal visuals"}
+                    </span>
+                    <span className="text-[8px] font-medium text-muted-foreground/60 uppercase tracking-[0.2em] mt-1">Images only</span>
+                  </div>
+                </motion.div>
               </Label>
-              <div className="relative group cursor-pointer">
-                <input
-                  type="file"
-                  id="certificates"
-                  multiple
-                  accept="image/*"
-                  onChange={(e) => setSelectedCertificates(e.target.files)}
-                  className="hidden"
-                />
-                <Label
-                  htmlFor="certificates"
-                  className={cn(
-                    "flex flex-col items-center justify-center w-full h-32 rounded-3xl border-2 border-dashed transition-all cursor-pointer",
-                    selectedCertificates
-                      ? "border-green-500/50 bg-green-500/5"
-                      : "border-border/40 bg-background/20 hover:bg-primary/5 hover:border-primary/40"
-                  )}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={cn(
-                      "flex flex-col items-center gap-2",
-                      selectedCertificates ? "text-green-600" : "text-muted-foreground"
-                    )}
-                  >
-                    {selectedCertificates ? <CheckCircle2 className="w-6 h-6" /> : <FileText className="w-5 h-5" />}
-                    <div className="flex flex-col items-center">
-                      <span className="text-[10px] text-center px-4 font-bold uppercase tracking-wide">
-                        {selectedCertificates ? `${selectedCertificates.length} Certificates Verified` : "Upload quality proofs"}
-                      </span>
-                      <span className="text-[8px] font-medium text-muted-foreground/60 uppercase tracking-[0.2em] mt-1">Images only</span>
-                    </div>
-                  </motion.div>
-                </Label>
-              </div>
             </div>
           </div>
 

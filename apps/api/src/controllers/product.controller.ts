@@ -28,7 +28,7 @@ export const createProduct = catchAsync(
 
     // Handle uploaded images and certificates
     let imageURIs: string[] = [];
-    let certificateURIs: string[] = [];
+    const certificateURIs: string[] = [];
 
     const files = req.files as
       | { [fieldname: string]: Express.Multer.File[] }
@@ -37,9 +37,6 @@ export const createProduct = catchAsync(
     if (files) {
       if (files.images) {
         imageURIs = files.images.map((file) => file.path);
-      }
-      if (files.certificates) {
-        certificateURIs = files.certificates.map((file) => file.path);
       }
     }
 
@@ -170,7 +167,7 @@ export const updateProduct = catchAsync(
 
     // Handle image updates if new files are uploaded
     let imageURIs = product.imageURIs;
-    let certificateURIs = product.certificateURIs ?? [];
+    const certificateURIs = product.certificateURIs ?? [];
 
     const files = req.files as
       | { [fieldname: string]: Express.Multer.File[] }
@@ -185,18 +182,6 @@ export const updateProduct = catchAsync(
         );
         // Set new image paths
         imageURIs = files.images.map((file) => file.path);
-      }
-
-      // 2. Update certificates if provided
-      if (files.certificates && files.certificates.length > 0) {
-        // Delete old certificates from Cloudinary
-        await Promise.all(
-          (product.certificateURIs ?? []).map((url) =>
-            deleteImageFromCloudinary(url),
-          ),
-        );
-        // Set new certificate paths
-        certificateURIs = files.certificates.map((file) => file.path);
       }
     }
 
@@ -252,12 +237,9 @@ export const deleteProduct = catchAsync(
       );
     }
 
-    // 1. Delete all images and certificates from Cloudinary
+    // 1. Delete all images from Cloudinary
     await Promise.all([
       ...product.imageURIs.map((url) => deleteImageFromCloudinary(url)),
-      ...(product.certificateURIs ?? []).map((url) =>
-        deleteImageFromCloudinary(url),
-      ),
     ]);
 
     // 2. Delete the database record

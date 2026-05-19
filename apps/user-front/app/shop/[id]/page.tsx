@@ -71,7 +71,6 @@ export default function ProductShowcase({ params }: { params: Promise<{ id: stri
               categoryName={product.categoryId?.name}
               description={product.productDescription}
               farmer={product.farmerId}
-              certificates={product.certificateURIs}
             />
 
             <ProductCheckout

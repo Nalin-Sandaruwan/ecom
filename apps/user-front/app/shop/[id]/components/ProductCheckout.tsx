@@ -142,7 +142,7 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
           </div>
           <div className="flex flex-col">
             <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Global Dispatch</span>
-            <span className="text-[8px] font-bold text-muted-foreground uppercase">Insured transit</span>
+            <span className="text-[8px] font-bold text-primary uppercase">4-5 days delivery</span>
           </div>
         </div>
         <div className="flex items-center gap-4 group">

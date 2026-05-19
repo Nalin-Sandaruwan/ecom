@@ -30,7 +30,6 @@ router.post(
   restrictTo(UserRole.FARMER),
   upload.fields([
     { name: "images", maxCount: 2 },
-    { name: "certificates", maxCount: 2 },
   ]),
   createProduct,
 );
@@ -42,7 +41,6 @@ router
     restrictTo(UserRole.FARMER),
     upload.fields([
       { name: "images", maxCount: 2 },
-      { name: "certificates", maxCount: 2 },
     ]),
     updateProduct,
   )

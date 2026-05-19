@@ -39,10 +39,6 @@ const ProductSchema: Schema = new Schema(
     },
     certificateURIs: {
       type: [String],
-      validate: [
-        (val: string[]) => val.length <= 2,
-        "{PATH} exceeds the limit of 2 certificates",
-      ],
       default: [],
     },
     productType: {

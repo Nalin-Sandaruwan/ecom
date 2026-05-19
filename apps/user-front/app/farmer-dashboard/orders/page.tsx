@@ -137,7 +137,10 @@ export default function FarmerOrdersPage() {
                   status: order.status,
                   paymentStatus: order.paymentStatus,
                   date: order.createdAt,
-                  address: order.deliveryAddress
+                  address: order.deliveryAddress,
+                  trackingNumber: order.trackingNumber || "",
+                  paymentSlipURI: order.paymentSlipURI || "",
+                  contactPhone: order.contactPhone || ""
                 }}
                 statuses={ORDER_STATUSES}
                 fullOrder={order}

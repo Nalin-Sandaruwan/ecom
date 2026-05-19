@@ -21,9 +21,12 @@ import {
   Phone,
   Package,
   ArrowRight,
-  Settings2
+  Settings2,
+  FileText,
+  Calendar
 } from "lucide-react";
 import { useFarmerOrders } from "@/lib/hooks/useFarmerOrders";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -48,8 +51,12 @@ interface OrderDetailsDrawerProps {
     items: OrderItem[];
     total: number;
     status: string;
+    paymentStatus: string;
     date: string;
     address: string;
+    trackingNumber?: string;
+    paymentSlipURI?: string;
+    contactPhone?: string;
   };
   statusInfo: any;
   fullOrder: any;
@@ -61,10 +68,34 @@ export const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
   statusInfo,
   fullOrder
 }) => {
-  const { updateStatus, isUpdating } = useFarmerOrders();
+  const { updateStatus, isUpdating, updateOrder, isUpdatingOrder } = useFarmerOrders();
+  const [trackingNumber, setTrackingNumber] = React.useState(order.trackingNumber || "");
+
+  React.useEffect(() => {
+    setTrackingNumber(order.trackingNumber || "");
+  }, [order.trackingNumber]);
+
+  const handleSaveTracking = () => {
+    updateOrder({ orderId: order.id, trackingNumber });
+  };
+
+  const handlePaymentStatusUpdate = (newPaymentStatus: string) => {
+    updateOrder({ orderId: order.id, paymentStatus: newPaymentStatus });
+  };
 
   const handleStatusUpdate = (newStatus: string) => {
     updateStatus({ orderId: order.id, status: newStatus });
+  };
+
+  const getEstimatedDeliveryDateRange = (dateString: string) => {
+    const orderDate = new Date(dateString);
+    if (isNaN(orderDate.getTime())) return "4-5 business days";
+    const minEstDate = new Date(orderDate);
+    minEstDate.setDate(orderDate.getDate() + 4);
+    const maxEstDate = new Date(orderDate);
+    maxEstDate.setDate(orderDate.getDate() + 5);
+    const options: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", year: "numeric" };
+    return `${minEstDate.toLocaleDateString("en-US", options)} - ${maxEstDate.toLocaleDateString("en-US", options)}`;
   };
 
   const getNextStatus = () => {
@@ -145,7 +176,7 @@ export const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                 <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Truck className="w-3 h-3 text-primary" /> Fulfillment Logistics
                 </h4>
-                <div className="bg-muted/10 border border-border/40 rounded-3xl p-6 space-y-4">
+                <div className="bg-muted/10 border border-border/40 rounded-3xl p-6 space-y-5">
                   <div className="flex items-start gap-3">
                     <MapPin className="w-4 h-4 text-primary mt-1" />
                     <div>
@@ -155,8 +186,77 @@ export const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                       </p>
                     </div>
                   </div>
+
+                  <div className="flex items-start gap-3 pt-4 border-t border-border/20">
+                    <Phone className="w-4 h-4 text-primary mt-1" />
+                    <div>
+                      <p className="text-sm font-bold text-heading">Contact Phone Number</p>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">
+                        {order.contactPhone || "Not provided"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 pt-4 border-t border-border/20">
+                    <Calendar className="w-4 h-4 text-primary mt-1" />
+                    <div>
+                      <p className="text-sm font-bold text-heading">Estimated Delivery Deadline</p>
+                      <p className="text-[11px] text-emerald-600 font-bold mt-0.5 uppercase tracking-wider bg-emerald-500/10 px-2.5 py-1 rounded-xl w-fit border border-emerald-500/20">
+                        {getEstimatedDeliveryDateRange(order.date)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/20 space-y-2">
+                    <label className="text-[9px] font-black uppercase tracking-wider text-muted-foreground">Fulfillment Tracking Number</label>
+                    <div className="flex gap-2">
+                      <Input
+                        value={trackingNumber}
+                        onChange={(e) => setTrackingNumber(e.target.value)}
+                        placeholder="e.g. TRK12345678"
+                        className="h-10 rounded-xl bg-background border-border/40 text-xs font-semibold px-4 flex-1"
+                      />
+                      <Button
+                        onClick={handleSaveTracking}
+                        disabled={isUpdatingOrder}
+                        size="sm"
+                        className="h-10 px-4 rounded-xl font-bold uppercase tracking-wider text-[9px] bg-primary text-primary-foreground shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all"
+                      >
+                        {isUpdatingOrder ? "Saving..." : "Save"}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* Payment Slip Receipt verification (Farmer view) */}
+              {order.paymentSlipURI && (
+                <div className="space-y-4">
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                    <FileText className="w-3 h-3 text-primary" /> Bank Wire Receipt Slip
+                  </h4>
+                  <div className="bg-muted/10 border border-border/40 rounded-3xl p-6 flex flex-col gap-4">
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">
+                      The customer has uploaded this receipt slip. Please verify the credentials and amount before changing the Payment Status to <strong className="text-emerald-500 uppercase font-black">PAID</strong>.
+                    </p>
+                    <a
+                      href={order.paymentSlipURI}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative block border border-border/40 rounded-2xl overflow-hidden bg-background max-h-64 cursor-zoom-in group/slip"
+                    >
+                      <img
+                        src={order.paymentSlipURI}
+                        alt="Bank Wire Receipt"
+                        className="w-full h-full object-contain max-h-60 mx-auto transition-transform group-hover/slip:scale-[1.02] duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/slip:opacity-100 flex items-center justify-center text-white font-black text-xs uppercase tracking-widest transition-opacity">
+                        View Fullscreen
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Harvest Breakdown (Product List) */}
@@ -214,6 +314,27 @@ export const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                   <SelectItem value="delivering" className="font-bold">Delivering</SelectItem>
                   <SelectItem value="completed" className="font-bold">Completed</SelectItem>
                   <SelectItem value="cancelled" className="font-bold">Cancelled</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Manual Payment Status Override */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">
+                <Settings2 className="w-3 h-3" /> Manual Payment Status Override
+              </div>
+              <Select
+                disabled={isUpdatingOrder}
+                value={order.paymentStatus}
+                onValueChange={handlePaymentStatusUpdate}
+              >
+                <SelectTrigger className="w-full h-12 bg-muted/10 border-border/40 rounded-xl font-bold">
+                  <SelectValue placeholder="Update Payment Status" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl border-border/40 shadow-2xl">
+                  <SelectItem value="unpaid" className="font-bold">Unpaid / Pending</SelectItem>
+                  <SelectItem value="paid" className="font-bold">Paid / Verified</SelectItem>
+                  <SelectItem value="failed" className="font-bold">Failed</SelectItem>
                 </SelectContent>
               </Select>
             </div>

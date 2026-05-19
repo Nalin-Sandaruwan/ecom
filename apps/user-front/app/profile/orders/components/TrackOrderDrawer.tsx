@@ -71,6 +71,7 @@ interface TrackOrderDrawerProps {
     _id: string;
     status: string;
     paymentStatus: string;
+    trackingNumber?: string;
   };
 }
 
@@ -136,8 +137,18 @@ export const TrackOrderDrawer: React.FC<TrackOrderDrawerProps> = ({
              <DrawerTitle className="text-3xl font-black tracking-tighter text-heading mt-2">
                Tracking Summary
              </DrawerTitle>
-             <DrawerDescription className="text-muted-foreground font-medium">
-               Real-time visualization of your order journey.
+             <DrawerDescription className="text-muted-foreground font-medium flex flex-col gap-1.5">
+               <span>Real-time visualization of your order journey.</span>
+               <div className="flex flex-wrap gap-2 mt-1.5">
+                 {order.trackingNumber && (
+                   <span className="text-xs font-bold text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-xl w-fit uppercase tracking-wider">
+                     Tracking Number: {order.trackingNumber}
+                   </span>
+                 )}
+                 <span className="text-xs font-bold text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-xl w-fit uppercase tracking-wider">
+                   Est. Delivery: 4-5 Days
+                 </span>
+               </div>
              </DrawerDescription>
           </DrawerHeader>
 

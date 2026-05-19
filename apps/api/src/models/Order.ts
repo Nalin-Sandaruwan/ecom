@@ -25,9 +25,12 @@ export interface IOrder extends Document {
   items: IOrderItem[];
   totalPrice: number;
   deliveryAddress: string;
+  contactPhone?: string;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   stripeSessionId?: string;
+  trackingNumber?: string;
+  paymentSlipURI?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -44,6 +47,7 @@ const OrderSchema: Schema = new Schema(
     ],
     totalPrice: { type: Number, required: true, min: 0 },
     deliveryAddress: { type: String, required: true },
+    contactPhone: { type: String },
     status: {
       type: String,
       enum: Object.values(OrderStatus),
@@ -55,6 +59,8 @@ const OrderSchema: Schema = new Schema(
       default: PaymentStatus.UNPAID,
     },
     stripeSessionId: { type: String },
+    trackingNumber: { type: String },
+    paymentSlipURI: { type: String },
   },
   { timestamps: true }
 );

@@ -10,7 +10,7 @@ import { UserRole } from "../models/User";
  * Create a new Order (User only)
  */
 export const createOrder = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const { items, deliveryAddress } = req.body;
+  const { items, deliveryAddress, contactPhone } = req.body;
 
   if (!items || !Array.isArray(items) || items.length === 0) {
     return next(new AppError("Order must contain at least one item", 400));
@@ -56,6 +56,7 @@ export const createOrder = catchAsync(async (req: Request, res: Response, next: 
       items: orderItems,
       totalPrice,
       deliveryAddress,
+      contactPhone,
       status: OrderStatus.PENDING,
     });
 
@@ -108,7 +109,7 @@ export const getAllOrders = catchAsync(async (req: Request, res: Response, next:
 export const getOrder = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const order = await Order.findById(req.params.id)
     .populate("userId", "name email phone")
-    .populate("items.product", "productName price");
+    .populate("items.product", "productName price imageURIs");
 
   if (!order) {
     return next(new AppError("Order not found", 404));
@@ -149,7 +150,7 @@ export const getMyOrders = catchAsync(async (req: Request, res: Response, next: 
   const orders = await Order.find({ userId: id })
     .sort("-createdAt") // Newest first
     .populate("userId", "name email")
-    .populate("items.product", "productName price images");
+    .populate("items.product", "productName price imageURIs");
 
   res.status(200).json({
     status: "success",
@@ -243,5 +244,33 @@ export const deleteOrder = catchAsync(async (req: Request, res: Response, next: 
   res.status(204).json({
     status: "success",
     data: null,
+  });
+});
+
+/**
+ * Upload Payment Slip Receipt (User only)
+ */
+export const uploadPaymentSlip = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  const order = await Order.findById(req.params.id);
+  if (!order) {
+    return next(new AppError("Order not found", 404));
+  }
+
+  if (order.userId.toString() !== req.user?._id.toString()) {
+    return next(new AppError("You do not have permission to modify this order", 403));
+  }
+
+  if (!req.file) {
+    return next(new AppError("Please upload a payment slip image", 400));
+  }
+
+  order.paymentSlipURI = req.file.path;
+  await order.save();
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      order,
+    },
   });
 });

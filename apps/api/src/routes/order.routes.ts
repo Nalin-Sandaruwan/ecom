@@ -7,10 +7,12 @@ import {
   updateOrder,
   deleteOrder,
   updateOrderStatus,
+  uploadPaymentSlip,
 } from "../controllers/order.controller";
 import { protect } from "../middleware/auth.middleware";
 import { restrictTo } from "../middleware/role.middleware";
 import { UserRole } from "../models/User";
+import { upload } from "../config/cloudinary.config";
 
 const router = Router();
 
@@ -31,6 +33,9 @@ router.get("/:id", restrictTo(UserRole.FARMER, UserRole.USER), getOrder);
 
 // User only: Create order
 router.post("/", restrictTo(UserRole.USER), createOrder);
+
+// User only: Upload payment slip for bank transfer orders
+router.patch("/:id/payment-slip", restrictTo(UserRole.USER), upload.single("paymentSlip"), uploadPaymentSlip);
 
 // Farmer only: Update, Delete, Status update
 router.patch("/:id", restrictTo(UserRole.FARMER), updateOrder);

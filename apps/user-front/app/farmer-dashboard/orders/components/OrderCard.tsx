@@ -28,6 +28,9 @@ interface OrderCardProps {
     paymentStatus: string;
     date: string;
     address: string;
+    trackingNumber?: string;
+    paymentSlipURI?: string;
+    contactPhone?: string;
   };
   statuses: any[];
   fullOrder: any;
