@@ -10,7 +10,8 @@ import {
   Star
 } from "lucide-react";
 
-import { useProducts, useCategories } from "@/lib/hooks/useProduct";
+import { useProducts } from "@/lib/hooks/useProduct";
+import { useCategories } from "@/lib/hooks/useCategory";
 
 // Modular Components
 import ShopHeader from "./components/ShopHeader";
@@ -24,10 +25,9 @@ export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data: productsData, isLoading } = useProducts();
-  const { data: categoriesData } = useCategories();
+  const { data: categories = [] } = useCategories();
 
   const products = productsData?.data?.products || [];
-  const categories = categoriesData?.data?.categories || [];
 
   const filteredProducts = products.filter((p: any) => {
     const matchesCategory = selectedCategory === "all" || p.categoryId?._id === selectedCategory;

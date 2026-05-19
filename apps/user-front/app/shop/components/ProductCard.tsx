@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { useCart } from "@/lib/hooks/useCart";
+import { useMe } from "@/lib/hooks/useAuth";
 
 interface ProductCardProps {
   product: {
@@ -19,10 +22,19 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem, isLoading } = useCart();
+  const { data: userData } = useMe();
+  const router = useRouter();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!userData?.user) {
+      toast.error("Please log in to add items to your cart.");
+      router.push("/login");
+      return;
+    }
+
     addItem(product, 1);
   };
   return (

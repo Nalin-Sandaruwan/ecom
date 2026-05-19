@@ -2,15 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createProduct, deleteProduct, getFarmerProducts, getProductById, getProducts, updateProduct } from "../api/product";
-import { getAllCategories } from "../api/category";
 import { toast } from "sonner";
-
-export const useCategories = () => {
-  return useQuery({
-    queryKey: ["categories"],
-    queryFn: getAllCategories,
-  });
-};
 
 export const useProducts = () => {
   return useQuery({

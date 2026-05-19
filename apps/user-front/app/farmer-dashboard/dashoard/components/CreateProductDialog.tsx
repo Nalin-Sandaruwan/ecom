@@ -145,7 +145,7 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
                 name="categoryId"
                 control={control}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value || undefined}>
                     <SelectTrigger className="w-full h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary px-5 text-sm font-medium">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>

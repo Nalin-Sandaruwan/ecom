@@ -5,9 +5,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { ShoppingBag, ArrowRight, Loader2, User, Mail, Lock, Phone, Palette, ShoppingCart } from "lucide-react";
+import { ShoppingBag, ArrowRight, Loader2, User, Mail, Lock, Phone } from "lucide-react";
 import { useSignup } from "@/lib/hooks/useAuth";
-import { motion } from "framer-motion";
 
 const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -26,7 +25,7 @@ const signupSchema = z.object({
 type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function RegisterPage() {
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<SignupFormValues>({
+  const { register, handleSubmit, formState: { errors } } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       name: "",
@@ -38,7 +37,6 @@ export default function RegisterPage() {
     }
   });
 
-  const selectedRole = watch("role");
   const { mutate: signup, isPending, error: apiError } = useSignup();
 
   const onSubmit = (data: SignupFormValues) => {
@@ -78,59 +76,6 @@ export default function RegisterPage() {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            
-            {/* Role Selection */}
-            <div className="space-y-3">
-              <label className="text-sm font-semibold text-foreground ml-1">I am a...</label>
-              <div className="grid grid-cols-2 gap-4">
-                <button
-                  type="button"
-                  onClick={() => setValue("role", "user")}
-                  className={`relative p-4 rounded-2xl border-2 transition-all duration-300 text-left group ${
-                    selectedRole === "user" 
-                      ? "border-primary bg-primary/5 shadow-lg shadow-primary/10" 
-                      : "border-border/50 hover:border-primary/30 bg-background/40"
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-colors ${
-                    selectedRole === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary"
-                  }`}>
-                    <ShoppingCart className="w-5 h-5" />
-                  </div>
-                  <p className={`font-bold text-sm ${selectedRole === "user" ? "text-primary" : "text-foreground"}`}>Customer</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">I want to buy premium wooden art.</p>
-                  {selectedRole === "user" && (
-                    <motion.div layoutId="role-check" className="absolute top-3 right-3 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </motion.div>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setValue("role", "farmer")}
-                  className={`relative p-4 rounded-2xl border-2 transition-all duration-300 text-left group ${
-                    selectedRole === "farmer" 
-                      ? "border-primary bg-primary/5 shadow-lg shadow-primary/10" 
-                      : "border-border/50 hover:border-primary/30 bg-background/40"
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-colors ${
-                    selectedRole === "farmer" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary"
-                  }`}>
-                    <Palette className="w-5 h-5" />
-                  </div>
-                  <p className={`font-bold text-sm ${selectedRole === "farmer" ? "text-primary" : "text-foreground"}`}>Artisan</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">I want to sell my crafted masterpieces.</p>
-                  {selectedRole === "farmer" && (
-                    <motion.div layoutId="role-check" className="absolute top-3 right-3 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </motion.div>
-                  )}
-                </button>
-              </div>
-              {errors.role && <p className="text-[12px] text-destructive ml-1">{errors.role.message}</p>}
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Full Name */}

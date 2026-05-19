@@ -128,7 +128,7 @@ export default function Navbar() {
 
             {/* User Section (Desktop) */}
             <div className="hidden md:flex items-center gap-4">
-              {isLoading ? (
+              {!mounted || isLoading ? (
                 <div className="w-8 h-8 rounded-full bg-muted animate-pulse" />
               ) : user ? (
                 <DropdownMenu modal={false}>

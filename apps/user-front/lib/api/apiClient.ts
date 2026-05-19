@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const isProd = process.env.NODE_ENV === "production";
+const defaultAPIUrl = isProd
+  ? "http://127.0.0.1:5000/api/v1"
+  : "http://localhost:5000/api/v1";
+
 // Create a globally configured Axios instance
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || defaultAPIUrl,
   withCredentials: true, // Crucial for sending setting HTTP-Only cookies automatically
 });
 

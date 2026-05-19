@@ -314,19 +314,19 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-xs font-bold">
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Bank Name</span>
-                  <span className="text-heading">WoodenGallery Bank PLC</span>
+                  <span className="text-heading">Commercial bank</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Account Number</span>
-                  <span className="text-primary font-black">7820491032</span>
+                  <span className="text-primary font-black">8026341367</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Account Name</span>
-                  <span className="text-heading">WoodenGallery E-Com (Pvt) Ltd</span>
+                  <span className="text-heading">W.A.K.D Sankalpa</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Branch Code</span>
-                  <span className="text-heading">Colombo Main - 045</span>
+                  <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Branch</span>
+                  <span className="text-heading">Enderamulla</span>
                 </div>
               </div>
             </div>
