@@ -1,6 +1,14 @@
 import dotenv from "dotenv";
 import path from "path";
-dotenv.config({ path: path.join(__dirname, "../.env") });
+const result = dotenv.config({ path: path.join(__dirname, "../.env") });
+if (result.error) {
+  console.error("❌ Dotenv Error loading .env:", result.error);
+} else {
+  console.log(
+    "✅ Successfully loaded env keys:",
+    Object.keys(result.parsed || {}),
+  );
+}
 
 import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
