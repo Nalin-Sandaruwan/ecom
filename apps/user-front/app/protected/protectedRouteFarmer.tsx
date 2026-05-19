@@ -89,8 +89,8 @@ export default function ProtectedRouteFarmer({ children }: { children: React.Rea
                     <div className="space-y-2">
                         <h2 className="text-3xl font-black text-foreground tracking-tight">Farmer Access Only</h2>
                         <p className="text-muted-foreground text-sm leading-relaxed">
-                            This area is reserved for authenticated ChilleBazzar farming partners.
-                            Your current account does not have farmer privileges.
+                            This area is reserved for authenticated WoodenGallery crafting partners.
+                            Your current account does not have partner privileges.
                         </p>
                     </div>
 

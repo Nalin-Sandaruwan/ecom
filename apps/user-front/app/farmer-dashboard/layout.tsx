@@ -74,8 +74,8 @@ const SidebarContent = ({ user, isLoading, pathname, onNavItemClick }: {
     { label: "Dashboard", href: "/farmer-dashboard/dashoard", icon: LayoutDashboard },
     { label: "Products", href: "/farmer-dashboard/products", icon: Package },
     { label: "Orders", href: "/farmer-dashboard/orders", icon: ShoppingBag },
-    { label: "Farmer Profile", href: "/farmer-dashboard/profiles", icon: User },
-    { label: "Shop Settings", href: "/farmer-dashboard/settings", icon: Settings },
+    { label: "Artisan Profile", href: "/farmer-dashboard/profiles", icon: User },
+    { label: "Studio Settings", href: "/farmer-dashboard/settings", icon: Settings },
   ];
 
   return (
@@ -104,7 +104,7 @@ const SidebarContent = ({ user, isLoading, pathname, onNavItemClick }: {
               <h2 className="font-bold text-foreground leading-tight">{user.name}</h2>
               <p className="text-xs text-muted-foreground truncate max-w-[140px]">{user.email}</p>
               <div className="mt-1 inline-flex px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider w-fit">
-                {user.role}
+                {user.role === "farmer" ? "artisan" : user.role}
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const SidebarContent = ({ user, isLoading, pathname, onNavItemClick }: {
       {/* Navigation Menu */}
       <div className="flex flex-col gap-2">
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-4 mb-2">
-          Farmer Dashboard
+          Artisan Studio
         </p>
         {sidebarLinks.map((link) => (
           <SidebarItem
@@ -158,7 +158,7 @@ export default function FarmerDashboardLayout({ children }: { children: React.Re
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
               <Package className="w-5 h-5 text-primary" />
             </div>
-            <h1 className="font-bold text-lg tracking-tight">Farmer Central</h1>
+            <h1 className="font-bold text-lg tracking-tight">Artisan Central</h1>
           </div>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

@@ -60,7 +60,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
                     <div className="space-y-2">
                         <h2 className="text-2xl font-black text-foreground tracking-tight">Account On Hold</h2>
                         <p className="text-muted-foreground text-sm leading-relaxed">
-                            Your ChilleBazzar account is currently pending review or has been deactivated.
+                            Your WoodenGallery account is currently pending review or has been deactivated.
                             Please contact our support team to restore your access.
                         </p>
                     </div>

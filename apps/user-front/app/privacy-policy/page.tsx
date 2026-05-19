@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
       title: "Introduction",
       content: (
         <p>
-          Welcome to ChilleBazzar. We respect your privacy and are committed to protecting your personal data.
+          Welcome to WoodenGallery. We respect your privacy and are committed to protecting your personal data.
           This privacy policy will inform you as to how we look after your personal data when you visit our website
           and tell you about your privacy rights and how the law protects you.
         </p>
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
       title: "Cookie Policy",
       content: (
         <p>
-          ChilleBazzar uses cookies to enhance your shopping experience. These small data files allow us to remember
+          WoodenGallery uses cookies to enhance your shopping experience. These small data files allow us to remember
           your preferences, track your cart, and provide personalized product recommendations. You can choose to
           refuse all or some cookies through your browser settings.
         </p>
@@ -199,7 +199,7 @@ export default function PrivacyPolicyPage() {
                 <div className="bg-primary/10 rounded-3xl p-6 border border-primary/20">
                   <Mail className="w-6 h-6 text-primary mb-3" />
                   <p className="text-[10px] uppercase font-black text-foreground mb-1">Questions?</p>
-                  <p className="text-[9px] text-muted-foreground">privacy@chillebazzar.com</p>
+                  <p className="text-[9px] text-muted-foreground">privacy@woodengallery.com</p>
                 </div>
               </div>
             </div>

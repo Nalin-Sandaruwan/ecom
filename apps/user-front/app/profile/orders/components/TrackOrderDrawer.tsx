@@ -115,7 +115,7 @@ export const TrackOrderDrawer: React.FC<TrackOrderDrawerProps> = ({
     {
       id: "completed",
       title: "Delivered",
-      description: "Journey complete. Enjoy your ChilleBazzar collection.",
+      description: "Journey complete. Enjoy your WoodenGallery collection.",
       icon: PackageCheck,
       isCompleted: order.status === "completed",
       isActive: false

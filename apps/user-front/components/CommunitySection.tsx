@@ -29,9 +29,9 @@ export const CommunitySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-6xl md:text-7xl lg:text-[100px] font-black text-white leading-[0.9] tracking-[-0.04em]"
             >
-              Let's join ChilleBazzar,<br />
+              Let's join WoodenGallery,<br />
               & build <span className="italic font-serif opacity-90">gorgeous</span><br />
-              harvests
+              spaces
             </motion.h2>
 
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
@@ -42,7 +42,7 @@ export const CommunitySection = () => {
                     <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <address className="not-italic text-white text-sm font-medium leading-tight">
-                    1929, Chille Bazaar Hub, Artisanal Way,<br />
+                    1929, Wooden Gallery Hub, Artisanal Way,<br />
                     Colombo, Sri Lanka
                   </address>
                 </div>
@@ -50,8 +50,8 @@ export const CommunitySection = () => {
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
-                  <a href="mailto:hello@chillebazzar.com" className="text-white text-sm font-medium">
-                    hello@chillebazzar.com
+                  <a href="mailto:hello@woodengallery.com" className="text-white text-sm font-medium">
+                    hello@woodengallery.com
                   </a>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export const CommunitySection = () => {
           <div className="w-full h-px bg-white/20 mb-8" />
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-white/60 text-xs font-bold uppercase tracking-widest">
-              © 2026 ChilleBazzar by Sans Brothers
+              © 2026 WoodenGallery by Sans Brothers
             </p>
             <div className="flex gap-8">
               <a href="#" className="text-white/60 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors">

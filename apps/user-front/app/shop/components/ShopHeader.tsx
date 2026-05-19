@@ -28,7 +28,7 @@ export default function ShopHeader({ searchTerm, setSearchTerm }: ShopHeaderProp
           Premium Selection
         </motion.h1>
         <p className="text-muted-foreground text-sm max-w-lg leading-relaxed font-medium">
-          Sourced directly from our network of elite farmers. Experience the peak of organic freshness and artisanal quality.
+          Sourced directly from our network of elite Sri Lankan wood craftsmen. Experience the peak of minimalist wood carving and premium aesthetic quality.
         </p>
       </div>
 

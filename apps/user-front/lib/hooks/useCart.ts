@@ -13,7 +13,7 @@ import {
 } from "../api/cart";
 import { useMe } from "./useAuth";
 
-const CART_STORAGE_KEY = "chille_bazzar_cart";
+const CART_STORAGE_KEY = "wooden_gallery_cart";
 
 export const useCart = () => {
   const queryClient = useQueryClient();
@@ -22,6 +22,7 @@ export const useCart = () => {
 
   // Guest Cart State
   const [guestItems, setGuestItems] = useState<CartItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Load guest cart from localStorage on mount
   useEffect(() => {
@@ -34,15 +35,16 @@ export const useCart = () => {
           console.error("Failed to parse guest cart", e);
         }
       }
+      setIsLoaded(true);
     }
   }, [isAuthenticated]);
 
   // Sync internal state with localStorage
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && isLoaded) {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(guestItems));
     }
-  }, [guestItems, isAuthenticated]);
+  }, [guestItems, isAuthenticated, isLoaded]);
 
   // TanStack Query for Authenticated Cart
   const { data: cartData, isLoading: isCartLoading } = useQuery({

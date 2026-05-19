@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import Order, { OrderStatus, PaymentStatus } from "../models/Order";
 import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/appError";
+import { sendEmail, generatePaymentVerifiedTemplate } from "../utils/email.utils";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2023-10-16" as any,
@@ -96,12 +97,28 @@ export const handleStripeWebhook = catchAsync(
 
       if (orderId) {
         // Update order status
-        const order = await Order.findById(orderId);
+        const order = await Order.findById(orderId).populate("userId", "name email");
         if (order) {
+          const alreadyPaid = order.paymentStatus === PaymentStatus.PAID;
           order.paymentStatus = PaymentStatus.PAID;
           order.status = OrderStatus.PREPARING; // Automatically move to preparing after payment
           await order.save();
           console.log(`🎉 Order ${orderId} successfully updated to PAID.`);
+
+          // Dispatch email if newly paid
+          if (!alreadyPaid && order.userId) {
+            const user: any = order.userId;
+            try {
+              sendEmail({
+                email: user.email,
+                subject: "Payment Verified! Your Order is Now Preparing — WoodenGallery",
+                message: `Hello ${user.name},\n\nGreat news! Your payment for Order ID ${order._id} has been verified successfully. We have started preparing your handcrafted minimalist wooden masterpiece.\n\nWe will notify you once it's on its way!`,
+                html: generatePaymentVerifiedTemplate(user.name, order._id.toString(), order.totalPrice),
+              }).catch(err => console.error("❌ Stripe Webhook Background Email Error:", err));
+            } catch (err) {
+              console.error("❌ Stripe Webhook Email Trigger Error:", err);
+            }
+          }
         } else {
           console.error(`❌ Order ${orderId} not found in database.`);
         }

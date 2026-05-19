@@ -158,7 +158,7 @@ export const OrderDetailsDrawer: React.FC<OrderDetailsDrawerProps> = ({
                 <div className="bg-muted/10 border border-border/40 rounded-3xl p-6 space-y-4">
                   <div>
                     <p className="text-lg font-bold text-heading leading-none">{order.customer}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Verified ChilleBazzar Buyer</p>
+                    <p className="text-xs text-muted-foreground mt-1">Verified WoodenGallery Buyer</p>
                   </div>
                   <div className="flex wrap gap-2">
                     <Button variant="outline" className="h-10 rounded-xl border-border/40 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">

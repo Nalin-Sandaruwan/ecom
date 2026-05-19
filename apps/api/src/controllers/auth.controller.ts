@@ -9,7 +9,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../utils/token.utils";
-import { sendEmail, generateOTPTemplate } from "../utils/email.utils";
+import { sendEmail, generateOTPTemplate, generateWelcomeTemplate } from "../utils/email.utils";
 import crypto from "crypto";
 
 // --- Base Signup logic ---
@@ -77,6 +77,18 @@ const baseSignup = async (
       ip: req.ip || "unknown",
       userAgent: req.headers["user-agent"] || "unknown",
     });
+  }
+
+  // Send a background Welcome email (Non-blocking)
+  try {
+    sendEmail({
+      email: user.email,
+      subject: "Welcome to WoodenGallery!",
+      message: `Hello ${user.name},\n\nThank you for signing up to WoodenGallery! We are thrilled to welcome you to our curated sanctuary of premium, minimalist wood art handcrafted in Sri Lanka.\n\nExplore our collections here: ${process.env.CLIENT_URL || 'http://localhost:3000'}/shop`,
+      html: generateWelcomeTemplate(user.name),
+    }).catch(err => console.error("❌ Background Welcome Email Error:", err));
+  } catch (err) {
+    console.error("❌ Welcome Email Trigger Error:", err);
   }
 
   res.status(201).json({

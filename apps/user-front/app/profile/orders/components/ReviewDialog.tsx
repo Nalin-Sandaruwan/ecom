@@ -31,7 +31,7 @@ export const ReviewDialog: React.FC<ReviewDialogProps> = ({
         {children}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] h-fit max-h-[90vh] overflow-y-auto bg-background/60 backdrop-blur-2xl border-border/40 rounded-[2.5rem] p-0  custom-scrollbar">
-        {/* ChilleBazzar Signature Gradient Top-Bar */}
+        {/* WoodenGallery Signature Gradient Top-Bar */}
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-amber-500 via-primary to-secondary" />
 
         <DialogHeader className="p-8 pb-0">

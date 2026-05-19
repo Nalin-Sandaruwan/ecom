@@ -115,7 +115,7 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
             </div>
             <div>
               <DialogTitle className="text-2xl font-bold tracking-tight text-heading">List New Product</DialogTitle>
-              <DialogDescription className="text-xs text-muted-foreground font-medium">Broadcast your harvest to the global elite market</DialogDescription>
+              <DialogDescription className="text-xs text-muted-foreground font-medium">Broadcast your handcrafted masterpiece to the global elite market</DialogDescription>
             </div>
           </div>
         </DialogHeader>
@@ -130,7 +130,7 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
               <Input
                 {...register("productName")}
                 id="productName"
-                placeholder="e.g. Premium Ceylon Cinnamon"
+                placeholder="e.g. Minimalist Mahogany Silhouette"
                 className="h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5"
               />
               {errors.productName && <p className="text-[10px] font-bold text-destructive ml-1">{errors.productName.message}</p>}
@@ -169,13 +169,13 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
             {/* Price */}
             <div className="space-y-2">
               <Label htmlFor="price" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <DollarSign className="w-3.5 h-3.5" /> Price ($)
+                <DollarSign className="w-3.5 h-3.5" /> Price (LKR)
               </Label>
               <Input
                 {...register("price")}
                 id="price"
                 type="text"
-                placeholder="45.00"
+                placeholder="45000"
                 className="h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5"
               />
               {errors.price && <p className="text-[10px] font-bold text-destructive ml-1">{errors.price.message}</p>}
@@ -184,13 +184,13 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
             {/* Quantity */}
             <div className="space-y-2">
               <Label htmlFor="quantity" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <Layers className="w-3.5 h-3.5" /> Quantity / Kg
+                <Layers className="w-3.5 h-3.5" /> Quantity / Pieces
               </Label>
               <Input
                 {...register("quantity")}
                 id="quantity"
                 type="text"
-                placeholder="50"
+                placeholder="5"
                 className="h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5"
               />
               {errors.quantity && <p className="text-[10px] font-bold text-destructive ml-1">{errors.quantity.message}</p>}
@@ -199,7 +199,7 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
             {/* Product Type */}
             <div className="col-span-full space-y-2">
               <Label htmlFor="productType" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <Layers className="w-3.5 h-3.5" /> Product Type
+                <Layers className="w-3.5 h-3.5" /> Craft Classification
               </Label>
               <Controller
                 name="productType"
@@ -207,14 +207,14 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary px-5 text-sm font-medium">
-                      <SelectValue placeholder="Select Product Type" />
+                      <SelectValue placeholder="Select Craft Type" />
                     </SelectTrigger>
                     <SelectContent className="rounded-2xl bg-background/80 backdrop-blur-xl border-border/40">
-                      <SelectItem value="produce" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Produce</SelectItem>
-                      <SelectItem value="seeds" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Seeds</SelectItem>
-                      <SelectItem value="fertilizers" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Fertilizers</SelectItem>
-                      <SelectItem value="equipment" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Equipment</SelectItem>
-                      <SelectItem value="other" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Other</SelectItem>
+                      <SelectItem value="produce" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Wooden Sculptures</SelectItem>
+                      <SelectItem value="seeds" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Wall Panels</SelectItem>
+                      <SelectItem value="fertilizers" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Tabletop Pieces</SelectItem>
+                      <SelectItem value="equipment" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Custom Carvings</SelectItem>
+                      <SelectItem value="other" className="rounded-xl focus:bg-primary/10 px-4 py-3 cursor-pointer transition-colors">Other Crafts</SelectItem>
                     </SelectContent>
                   </Select>
                 )}

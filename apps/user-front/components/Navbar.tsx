@@ -60,16 +60,10 @@ export default function Navbar() {
       <div className="mx-auto container px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between">
           <div className="flex items-center gap-8">
-            {/* Logo */}
             <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <Image
-                src="/logo.png"
-                alt="Chili Bazaar"
-                width={300}
-                height={80}
-                className="h-12 w-auto object-contain"
-                priority
-              />
+              <span className="text-xl md:text-2xl font-black tracking-tight text-heading flex items-center">
+                Wooden<span className="text-primary font-light">Gallery</span>
+              </span>
             </Link>
 
             {/* Desktop Navigation */}

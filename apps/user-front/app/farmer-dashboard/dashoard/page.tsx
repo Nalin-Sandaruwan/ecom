@@ -41,7 +41,7 @@ export default function FarmerDashboardPage() {
                                 {profile?.farmName || "Overview"}
                             </h1>
                             <p className="text-muted-foreground text-sm mt-1">
-                                {profile?.description || "Welcome back! Here's how your farm is performing today."}
+                                {profile?.description || "Welcome back! Here's how your artisan studio is performing today."}
                             </p>
                         </>
                     )}
@@ -50,7 +50,7 @@ export default function FarmerDashboardPage() {
                     <CreateFarmerDialog>
                         <Button variant="outline" className="rounded-2xl h-12 px-6 border-primary/20 hover:bg-primary/5 text-primary font-bold flex items-center gap-2 group transition-all">
                             <UserPlus className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                            Create Farmer
+                            Create Artisan Profile
                         </Button>
                     </CreateFarmerDialog>
                     <CreateProductDialog>
@@ -120,15 +120,15 @@ export default function FarmerDashboardPage() {
                         <RecentActivityItem
                             id={1}
                             title="New order received from Sarah J."
-                            details="2.5kg Organic Tomatoes"
-                            amount="+LKR 24.50"
+                            details="1x Premium Mahogany Silhouette Sculpture"
+                            amount="+LKR 24,500.00"
                             status="Paid"
                             time="4 mins ago"
                         />
                         <RecentActivityItem
                             id={2}
                             title="Inventory alert"
-                            details="Organic Strawberries running low"
+                            details="Minimalist Teak Wall Art blocks running low"
                             amount="Stock"
                             status="Alert"
                             time="15 mins ago"
@@ -137,7 +137,7 @@ export default function FarmerDashboardPage() {
                             id={3}
                             title="Payout processed"
                             details="Direct transfer to bank"
-                            amount="+LKR 1,240.00"
+                            amount="+LKR 124,000.00"
                             status="Success"
                             time="2 hours ago"
                         />

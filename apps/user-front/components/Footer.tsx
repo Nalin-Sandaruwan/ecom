@@ -26,16 +26,12 @@ export default function Footer() {
           {/* Brand Identity */}
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" className="flex items-center gap-3 group">
-              <Image 
-                src="/logo.png" 
-                alt="Chili Bazaar" 
-                width={400} 
-                height={120} 
-                className="h-32 w-auto object-contain group-hover:scale-105 transition-transform"
-              />
+              <span className="text-2xl font-black tracking-tight text-heading flex items-center group-hover:scale-105 transition-transform">
+                Wooden<span className="text-primary font-light">Gallery</span>
+              </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs font-medium">
-              ChilleBazzar is a boutique marketplace dedicated to the preservation of artisanal craft and the delivery of premium, hand-picked goods directly to your sanctuary.
+              WoodenGallery is a boutique gallery dedicated to the preservation of premium wood crafting and the delivery of elegant, comfortable interior furnishings directly to your sanctuary.
             </p>
             <div className="flex items-center gap-4">
               {[Camera, X, Mail].map((Icon, i) => (
@@ -90,7 +86,7 @@ export default function Footer() {
         <div className="mt-24 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-8 order-2 md:order-1">
             <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">
-              © {currentYear} ChilleBazzar Registry. All rights reserved.
+              © {currentYear} WoodenGallery Registry. All rights reserved.
             </p>
           </div>
           

@@ -5,7 +5,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { ShoppingBag, ArrowRight, Loader2, User, Mail, Lock, Phone, Tractor, ShoppingCart } from "lucide-react";
+import { ShoppingBag, ArrowRight, Loader2, User, Mail, Lock, Phone, Palette, ShoppingCart } from "lucide-react";
 import { useSignup } from "@/lib/hooks/useAuth";
 import { motion } from "framer-motion";
 
@@ -73,7 +73,7 @@ export default function RegisterPage() {
               Create Account
             </h1>
             <p className="text-sm text-muted-foreground text-center">
-              Join ChilleBazzar and define your journey
+              Join WoodenGallery and define your journey
             </p>
           </div>
 
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                     <ShoppingCart className="w-5 h-5" />
                   </div>
                   <p className={`font-bold text-sm ${selectedRole === "user" ? "text-primary" : "text-foreground"}`}>Customer</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">I want to buy fresh organic products.</p>
+                  <p className="text-[10px] text-muted-foreground mt-1">I want to buy premium wooden art.</p>
                   {selectedRole === "user" && (
                     <motion.div layoutId="role-check" className="absolute top-3 right-3 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
                       <div className="w-2 h-2 bg-white rounded-full" />
@@ -118,10 +118,10 @@ export default function RegisterPage() {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-colors ${
                     selectedRole === "farmer" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary"
                   }`}>
-                    <Tractor className="w-5 h-5" />
+                    <Palette className="w-5 h-5" />
                   </div>
-                  <p className={`font-bold text-sm ${selectedRole === "farmer" ? "text-primary" : "text-foreground"}`}>Farmer</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">I want to sell my fresh harvest.</p>
+                  <p className={`font-bold text-sm ${selectedRole === "farmer" ? "text-primary" : "text-foreground"}`}>Artisan</p>
+                  <p className="text-[10px] text-muted-foreground mt-1">I want to sell my crafted masterpieces.</p>
                   {selectedRole === "farmer" && (
                     <motion.div layoutId="role-check" className="absolute top-3 right-3 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
                       <div className="w-2 h-2 bg-white rounded-full" />

@@ -40,7 +40,7 @@ const StorySection = ({ title, subtitle, content, icon: Icon, reverse = false }:
       className="flex-1 space-y-6"
     >
       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">
-        <Icon className="w-3 h-3" /> ChilleBazzar Roots
+        <Icon className="w-3 h-3" /> WoodenGallery Roots
       </div>
       <h2 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-primary leading-[0.9]">{title}</h2>
       <p className="text-muted-foreground text-lg font-medium leading-relaxed max-w-xl">
@@ -89,7 +89,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-black tracking-tighter text-heading"
             >
-              The Science <br /> of Freshness.
+              The Art <br /> of Woodcraft.
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -97,7 +97,7 @@ export default function AboutPage() {
               transition={{ delay: 0.1 }}
               className="text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed"
             >
-              Founded in 2026, ChilleBazzar was built to redefine the boundary between local farmers and the global modern table.
+              Founded in 2026, WoodenGallery was built to redefine the boundary between local artisans and the global modern sanctuary.
             </motion.p>
           </div>
         </div>

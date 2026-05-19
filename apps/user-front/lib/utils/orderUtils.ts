@@ -26,7 +26,7 @@ export const generateOrderPDF = (order: Order, isFarmerExport = false, customerD
   const doc = new jsPDF();
 
   // Colors
-  const primaryColor = "#f97316"; // tailwind orange-500
+  const primaryColor = "#6D5543"; // rich wood brown
   const headingColor = "#111827"; // gray-900
   const textColor = "#4b5563"; // gray-600
 
@@ -45,11 +45,11 @@ export const generateOrderPDF = (order: Order, isFarmerExport = false, customerD
   doc.setTextColor("#ffffff");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(24);
-  doc.text("CHILLEBAZZAR", 55, 25);
+  doc.text("WOODENGALLERY", 55, 25);
   
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
-  doc.text("Artisanal Marketplace Hub - Elite Fulfillment Registry", 55, 32);
+  doc.text("Boutique Woodcraft & Elegant Interior Hub", 55, 32);
 
   // 2. Order Metadata
   doc.setTextColor(headingColor);
@@ -106,13 +106,13 @@ export const generateOrderPDF = (order: Order, isFarmerExport = false, customerD
     body: tableData,
     theme: "grid",
     headStyles: { 
-      fillColor: [249, 115, 22],
+      fillColor: [109, 85, 67],
       textColor: [255, 255, 255],
       fontStyle: "bold",
       fontSize: 10
     },
     styles: { fontSize: 9 },
-    alternateRowStyles: { fillColor: [255, 247, 237] },
+    alternateRowStyles: { fillColor: [247, 245, 242] },
     margin: { left: 20, right: 20 },
   });
 
@@ -127,13 +127,13 @@ export const generateOrderPDF = (order: Order, isFarmerExport = false, customerD
   // 6. Professional Footer
   doc.setFontSize(8);
   doc.setTextColor("#9ca3af");
-  doc.text("This manifest is a digitally authenticated document. For fulfillment support, contact ChilleBazzar HQ.", 105, 285, { align: "center" });
+  doc.text("This manifest is a digitally authenticated document. For fulfillment support, contact WoodenGallery HQ.", 105, 285, { align: "center" });
   doc.text("Thank you for your partnership in artisanal commerce. Deliver excellence.", 105, 290, { align: "center" });
 
   // Save with dynamic filename
   const fileName = isFarmerExport 
-    ? `CHB-Manifest-${order._id.slice(-6).toUpperCase()}.pdf`
-    : `CHB-Receipt-${order._id.slice(-6).toUpperCase()}.pdf`;
+    ? `WDG-Manifest-${order._id.slice(-6).toUpperCase()}.pdf`
+    : `WDG-Receipt-${order._id.slice(-6).toUpperCase()}.pdf`;
     
   doc.save(fileName);
 };

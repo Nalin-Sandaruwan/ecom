@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Tractor, MapPin, Info, Edit3, ShieldCheck, ExternalLink, Calendar } from "lucide-react";
+import { Palette, MapPin, Info, Edit3, ShieldCheck, ExternalLink, Calendar } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CreateFarmerDialog } from "./CreateFarmerDialog";
 import { Button } from "@/components/ui/button";
@@ -39,17 +39,17 @@ export const FarmerIdentityCard: React.FC<FarmerIdentityCardProps> = ({ profile,
       <div className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-10 flex flex-col items-center text-center space-y-6 relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
         <div className="w-20 h-20 rounded-[2rem] bg-background border border-primary/20 flex items-center justify-center shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500">
-          <Tractor className="w-10 h-10 text-primary" />
+          <Palette className="w-10 h-10 text-primary" />
         </div>
         <div className="space-y-2 relative z-10">
           <h3 className="text-2xl font-black text-heading">Identity Required</h3>
           <p className="text-sm text-muted-foreground max-w-[240px] leading-relaxed">
-            Launch your farm's digital presence to start connecting with elite customers.
+            Launch your studio's digital presence to start connecting with elite customers.
           </p>
         </div>
         <CreateFarmerDialog>
           <Button className="w-full h-14 rounded-2xl bg-primary text-primary-foreground font-black uppercase tracking-tighter shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all relative z-10 px-8">
-            Establish Farm Identity
+            Establish Studio Identity
           </Button>
         </CreateFarmerDialog>
       </div>
@@ -74,7 +74,7 @@ export const FarmerIdentityCard: React.FC<FarmerIdentityCardProps> = ({ profile,
       <div className="px-8 -mt-10 relative z-20 flex justify-between items-end">
         <div className="w-20 h-20 rounded-[2.2rem] bg-background border-4 border-background flex items-center justify-center group-hover:rotate-6 transition-transform duration-500">
           <div className="w-full h-full rounded-[1.8rem] bg-primary/10 flex items-center justify-center border border-primary/5">
-            <Tractor className="w-9 h-9 text-primary" />
+            <Palette className="w-9 h-9 text-primary" />
           </div>
         </div>
         <div className="flex items-center gap-2 bg-background/80 backdrop-blur-xl border border-border/40 px-4 py-2 rounded-2xl hover:bg-background transition-colors cursor-default">

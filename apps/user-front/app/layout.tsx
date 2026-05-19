@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ChilleBazzar",
-  description: "ChilleBazzar - Buy and sell chillies",
+  title: "WoodenGallery",
+  description: "WoodenGallery - Elegant & Comfort Premium Interior Furnishings",
 };
 
 import { QueryProvider } from "@/components/query-provider";

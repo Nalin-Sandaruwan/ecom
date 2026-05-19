@@ -68,7 +68,7 @@ export default function ContactPage() {
               transition={{ delay: 0.1 }}
               className="text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed"
             >
-              Have questions about our premium organic collections? Our dedicated team is ready to assist you in every step.
+              Have questions about our premium wood-crafted collections? Our dedicated team is ready to assist you in every step.
             </motion.p>
           </div>
         </div>
@@ -114,9 +114,9 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-2">Email Address</label>
                   <input 
-                    type="email" 
-                    placeholder="name@example.com"
-                    className="w-full bg-background/50 border border-border/40 rounded-2xl px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all outline-none"
+                     type="email" 
+                     placeholder="name@example.com"
+                     className="w-full bg-background/50 border border-border/40 rounded-2xl px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all outline-none"
                   />
                 </div>
 
@@ -142,7 +142,7 @@ export default function ContactPage() {
             <ContactInfoCard 
               icon={Mail} 
               title="Email Support" 
-              detail="support@chillebazzar.com" 
+              detail="support@woodengallery.com" 
               subdetail="24/7 technical monitoring" 
               color="indigo-500"
             />
@@ -174,7 +174,7 @@ export default function ContactPage() {
                   <Globe className="w-10 h-10 mb-4 text-white/80" />
                   <h3 className="text-2xl font-extrabold tracking-tighter uppercase mb-2 text-white">Global Partnerships</h3>
                   <p className="text-white/70 text-xs font-bold leading-relaxed max-w-xs">
-                    Interested in becoming a ChilleBazzar farming partner? Join our elite network.
+                    Interested in becoming a WoodenGallery crafting partner? Join our elite network.
                   </p>
                </div>
                <Button className="relative z-10 bg-white text-primary rounded-2xl h-14 px-8 font-black uppercase text-xs tracking-widest hover:scale-105 active:scale-95 transition-all">

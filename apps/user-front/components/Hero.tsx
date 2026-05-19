@@ -13,9 +13,9 @@ export default function Hero() {
       {/* Dynamic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero-bg.png"
-          alt="Premium Organic Farm"
-          className="w-full h-full object-cover opacity-30 dark:opacity-20 "
+          src="/wooden_art_hero.png"
+          alt="Premium Minimalist Wooden Art"
+          className="w-full h-full object-cover opacity-20 dark:opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
       </div>
@@ -40,7 +40,7 @@ export default function Hero() {
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
-                Premium Harvest 2026 Collection
+                Minimalist Woodcraft 2026 Collection
               </span>
             </motion.div>
 
@@ -52,9 +52,9 @@ export default function Hero() {
                 transition={{ duration: 0.8 }}
                 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-[0.9] text-heading uppercase"
               >
-                Purely <br />
+                Wooden <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-heading via-primary to-primary/40">
-                  Organic
+                  Gallery
                 </span>
               </motion.h1>
               <motion.p
@@ -63,7 +63,7 @@ export default function Hero() {
                 transition={{ delay: 0.2, duration: 0.8 }}
                 className="text-lg md:text-xl text-primary/70 max-w-xl leading-relaxed font-semibold pl-2"
               >
-                Experience the peak of farm-to-table excellence. Redefining high-end artisanal quality for the modern conscious table.
+                Experience the peak of minimalist wood crafting. Redefining high-end wooden masterpieces for the modern sanctuary. Handcrafted in Sri Lanka.
               </motion.p>
             </div>
 
@@ -97,11 +97,11 @@ export default function Hero() {
             >
               <div className="flex items-center gap-2 text-primary/60">
                 <ShieldCheck className="w-4 h-4 text-primary" />
-                <span className="text-[10px] font-black uppercase tracking-widest">certified organic</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">Locally Handcrafted</span>
               </div>
               <div className="flex items-center gap-2 text-primary/60">
                 <Globe className="w-4 h-4 text-primary" />
-                <span className="text-[10px] font-black uppercase tracking-widest">Global Shipping</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">Islandwide & Global Shipping</span>
               </div>
             </motion.div>
           </div>
@@ -116,14 +116,14 @@ export default function Hero() {
             <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-[4rem] group-hover:bg-primary/30 transition-all duration-700" />
             <div className="relative w-[500px] h-[600px] bg-primary/5 border border-primary/10 rounded-[4rem] backdrop-blur-2xl overflow-hidden p-3 shadow-2xl">
               <img
-                src="/products/African-Birds-Eye.jpg"
-                alt="Elite Produce"
+                src="/wooden_art_hero.png"
+                alt="Elite Wooden Art"
                 className="w-full h-full object-cover rounded-[3rem] group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="absolute inset-x-8 bottom-12 p-8 bg-background/80 backdrop-blur-xl border border-primary/10 rounded-[2.5rem] space-y-2">
-                <h3 className="text-2xl font-bold uppercase tracking-tight text-heading">Heirloom Crate</h3>
+                <h3 className="text-2xl font-bold uppercase tracking-tight text-heading">The Silhouette</h3>
                 <div className="flex justify-between items-end">
-                  <p className="text-primary/60 text-[10px] font-black uppercase tracking-widest">In stock today</p>
+                  <p className="text-primary/60 text-[10px] font-black uppercase tracking-widest">Crafted in Sri Lanka</p>
                   <Link href="/shop" className="text-primary font-black uppercase text-xs hover:underline underline-offset-4 tracking-widest">View Details</Link>
                 </div>
               </div>

@@ -17,11 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateFarmerProfile } from "@/lib/hooks/useFarmer";
-import { Loader2, UserPlus, MapPin, FileText, Tractor } from "lucide-react";
+import { Loader2, UserPlus, MapPin, FileText, Palette, Hammer } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const farmerSchema = z.object({
-  farmName: z.string().min(3, "Farm name must be at least 3 characters"),
+  farmName: z.string().min(3, "Studio name must be at least 3 characters"),
   address: z.string().min(5, "Address must be at least 5 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
 });
@@ -73,11 +73,11 @@ export function CreateFarmerDialog({ children }: { children: React.ReactNode }) 
         <DialogHeader className="p-8 pb-4">
           <div className="flex items-center gap-4 mb-2">
             <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-              <Tractor className="w-6 h-6 text-primary" />
+              <Palette className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <DialogTitle className="text-2xl font-bold tracking-tight text-heading">Create Farmer Profile</DialogTitle>
-              <DialogDescription className="text-xs text-muted-foreground font-medium">Define your harvest legacy on ChilleBazzar</DialogDescription>
+              <DialogTitle className="text-2xl font-bold tracking-tight text-heading">Create Artisan Studio</DialogTitle>
+              <DialogDescription className="text-xs text-muted-foreground font-medium">Define your craft legacy on WoodenGallery</DialogDescription>
             </div>
           </div>
         </DialogHeader>
@@ -87,12 +87,12 @@ export function CreateFarmerDialog({ children }: { children: React.ReactNode }) 
             {/* Farm Name */}
             <div className="space-y-2">
               <Label htmlFor="farmName" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <Tractor className="w-3.5 h-3.5" /> Farm Name
+                <Hammer className="w-3.5 h-3.5" /> Studio / Workshop Name
               </Label>
               <Input
                 {...register("farmName")}
                 id="farmName"
-                placeholder="e.g. Green Valley Estates"
+                placeholder="e.g. Ceylon Minimalist Carvings"
                 className="h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5"
               />
               {errors.farmName && <p className="text-[10px] font-bold text-destructive ml-1">{errors.farmName.message}</p>}
@@ -101,12 +101,12 @@ export function CreateFarmerDialog({ children }: { children: React.ReactNode }) 
             {/* Address */}
             <div className="space-y-2">
               <Label htmlFor="address" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <MapPin className="w-3.5 h-3.5" /> Farm Address
+                <MapPin className="w-3.5 h-3.5" /> Studio Address
               </Label>
               <Input
                 {...register("address")}
                 id="address"
-                placeholder="123 Orchard Lane, Valley City"
+                placeholder="e.g. 45 Galle Road, Colombo 03, Sri Lanka"
                 className="h-12 rounded-2xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5"
               />
               {errors.address && <p className="text-[10px] font-bold text-destructive ml-1">{errors.address.message}</p>}
@@ -115,12 +115,12 @@ export function CreateFarmerDialog({ children }: { children: React.ReactNode }) 
             {/* Description */}
             <div className="space-y-2">
               <Label htmlFor="description" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-                <FileText className="w-3.5 h-3.5" /> Farm Description
+                <FileText className="w-3.5 h-3.5" /> Artisan Bio & Woodworking Methods
               </Label>
               <Textarea
                 {...register("description")}
                 id="description"
-                placeholder="Tell us about your artisanal harvesting methods..."
+                placeholder="Tell us about your organic wood selections, seasoning, and minimalist carving methods in Sri Lanka..."
                 rows={4}
                 className="rounded-3xl bg-background/40 border-border/40 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all px-5 py-3 resize-none"
               />
@@ -145,14 +145,15 @@ export function CreateFarmerDialog({ children }: { children: React.ReactNode }) 
               {isPending ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                  Cultivating...
+                  Creating...
                 </>
               ) : (
                 <>
-                  Launch Profile
+                  Launch Studio
                   <UserPlus className="w-5 h-5 ml-2" />
                 </>
-              )}
+              )
+              }
             </Button>
           </div>
         </form>

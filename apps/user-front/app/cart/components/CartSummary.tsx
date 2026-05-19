@@ -318,7 +318,7 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-xs font-bold">
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Bank Name</span>
-                  <span className="text-heading">ChilleBazzar Bank PLC</span>
+                  <span className="text-heading">WoodenGallery Bank PLC</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Account Number</span>
@@ -326,7 +326,7 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
                 </div>
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Account Name</span>
-                  <span className="text-heading">ChilleBazzar E-Com (Pvt) Ltd</span>
+                  <span className="text-heading">WoodenGallery E-Com (Pvt) Ltd</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-medium text-muted-foreground/80 block uppercase">Branch Code</span>
