@@ -1,0 +1,64 @@
+name: 🚀 Build & Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Production VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: 📦 Install Workspace Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Monorepo (Next.js & Express API)
+        run: npm run build
+
+      - name: ⚙️ Prepare Next.js Standalone Assets
+        run: |
+          # Copy public and static assets into the Next.js standalone folder (required by Next.js output standalone)
+          cp -r apps/user-front/public apps/user-front/.next/standalone/apps/user-front/
+          cp -r apps/user-front/.next/static apps/user-front/.next/standalone/apps/user-front/.next/
+
+      - name: 🔑 Configure SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "${{ secrets.VPS_IP }}" >> ~/.ssh/known_hosts
+
+      - name: 🚚 Deploy Production Assets via Rsync
+        run: |
+          # Sync only production necessary files, excluding heavy folders like node_modules and cache.
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            --exclude 'node_modules/' \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.turbo/' \
+            --exclude 'apps/user-front/.next/cache/' \
+            --exclude 'apps/user-front/app/' \
+            --exclude 'apps/user-front/components/' \
+            --exclude 'apps/user-front/lib/' \
+            --exclude 'apps/api/src/' \
+            ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/var/www/chillebazzar
+
+      - name: 🔄 Post-Deploy PM2 App Restart
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} "
+            cd /var/www/chillebazzar && \
+            npm ci --omit=dev && \
+            pm2 startOrReload ecosystem.config.js --update-env
+          "
