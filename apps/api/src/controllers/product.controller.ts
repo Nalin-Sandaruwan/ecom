@@ -20,6 +20,26 @@ export const createProduct = catchAsync(
       isActive,
     } = req.body;
 
+    // Robust parsing and validation for price
+    if (price === undefined || price === null || price === "") {
+      return next(new AppError("Price is required", 400));
+    }
+    const cleanPrice = typeof price === "string" ? price.replace(/[^0-9.]/g, "") : price;
+    const parsedPrice = Number(cleanPrice);
+    if (isNaN(parsedPrice)) {
+      return next(new AppError("Price must be a valid number", 400));
+    }
+
+    // Robust parsing and validation for quantity
+    if (quantity === undefined || quantity === null || quantity === "") {
+      return next(new AppError("Quantity is required", 400));
+    }
+    const cleanQuantity = typeof quantity === "string" ? quantity.replace(/[^0-9.]/g, "") : quantity;
+    const parsedQuantity = Number(cleanQuantity);
+    if (isNaN(parsedQuantity)) {
+      return next(new AppError("Quantity must be a valid number", 400));
+    }
+
     // Verify the category exists
     const category = await Category.findById(categoryId);
     if (!category) {
@@ -45,8 +65,8 @@ export const createProduct = catchAsync(
     const product = await Product.create({
       productName,
       productDescription,
-      price: Number(price),
-      quantity: Number(quantity),
+      price: parsedPrice,
+      quantity: parsedQuantity,
       productType,
       categoryId,
       farmerId,
@@ -185,12 +205,31 @@ export const updateProduct = catchAsync(
       }
     }
 
+    // Robust parsing for price & quantity
+    let parsedPrice = product.price;
+    if (price !== undefined && price !== null && price !== "") {
+      const cleanPrice = typeof price === "string" ? price.replace(/[^0-9.]/g, "") : price;
+      parsedPrice = Number(cleanPrice);
+      if (isNaN(parsedPrice)) {
+        return next(new AppError("Price must be a valid number", 400));
+      }
+    }
+
+    let parsedQuantity = product.quantity;
+    if (quantity !== undefined && quantity !== null && quantity !== "") {
+      const cleanQuantity = typeof quantity === "string" ? quantity.replace(/[^0-9.]/g, "") : quantity;
+      parsedQuantity = Number(cleanQuantity);
+      if (isNaN(parsedQuantity)) {
+        return next(new AppError("Quantity must be a valid number", 400));
+      }
+    }
+
     // Update properties
     const updateData = {
       productName,
       productDescription,
-      price: price ? Number(price) : product.price,
-      quantity: quantity ? Number(quantity) : product.quantity,
+      price: parsedPrice,
+      quantity: parsedQuantity,
       productType,
       categoryId,
       imageURIs,
