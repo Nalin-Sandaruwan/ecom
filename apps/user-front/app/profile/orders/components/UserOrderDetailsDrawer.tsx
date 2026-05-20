@@ -74,15 +74,15 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
         {children}
       </DrawerTrigger>
       <DrawerContent className="max-h-[90vh] bg-background">
-        <div className="mx-auto w-full max-w-[800px] overflow-y-auto overflow-x-hidden">
-          <DrawerHeader className="px-8 pt-8 text-left">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-border/40">
+        <div className="mx-auto w-full max-w-[800px] max-h-[calc(90vh-1rem)] overflow-y-auto overflow-x-hidden custom-scrollbar">
+          <DrawerHeader className="px-4 sm:px-8 pt-6 sm:pt-8 text-left">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 pb-6 border-b border-border/40">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary">
                   <ShoppingBag className="w-3 h-3" />
                   Order Manifest
                 </div>
-                <DrawerTitle className="text-3xl font-black  flex items-center gap-3">
+                <DrawerTitle className="text-2xl sm:text-3xl font-black flex items-center gap-3">
                   Order #{order._id.slice(-6).toUpperCase()}
                 </DrawerTitle>
                 <DrawerDescription className="text-muted-foreground font-medium">
@@ -90,21 +90,21 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
                 </DrawerDescription>
               </div>
 
-              <div className="flex flex-col items-end">
-                <p className="text-3xl font-black text-primary">LKR {order.totalPrice.toFixed(2)}</p>
+              <div className="flex flex-col items-start md:items-end">
+                <p className="text-2xl sm:text-3xl font-black text-primary">LKR {order.totalPrice.toFixed(2)}</p>
               </div>
             </div>
           </DrawerHeader>
 
-          <div className="px-8 py-8 space-y-10">
+          <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-8 sm:space-y-10">
             {/* Logistics & Security Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
               {/* Shipping Info */}
               <div className="space-y-4">
                 <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <MapPin className="w-3 h-3 text-primary" /> Delivery Destination
                 </h4>
-                <div className="bg-muted/10 border border-border/40 rounded-3xl p-6 space-y-3">
+                <div className="bg-muted/10 border border-border/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-3">
                   <div>
                     <p className="text-sm font-bold text-heading">Shipping Address</p>
                     <p className="text-[11px] text-muted-foreground leading-relaxed mt-1">
@@ -113,7 +113,7 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
                   </div>
                   <div className="pt-3 border-t border-border/20 flex items-center justify-between text-xs font-bold">
                     <span className="text-muted-foreground uppercase tracking-widest text-[9px]">Estimated Delivery</span>
-                    <span className="text-primary uppercase tracking-widest text-[9px] bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-lg">4-5 Business Days</span>
+                    <span className="text-primary uppercase tracking-widest text-[9px] bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-lg">4-5 Days</span>
                   </div>
                   {order.trackingNumber && (
                     <div className="pt-3 border-t border-border/40">
@@ -132,21 +132,21 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
                   <ShieldCheck className="w-3 h-3 text-emerald-500" /> Transaction Security
                 </h4>
                 <div className="space-y-4">
-                  <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-3xl p-6 flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center">
+                  <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
                       <CreditCard className="w-5 h-5 text-emerald-500" />
                     </div>
-                    <div>
-                      <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">
-                        {order.paymentStatus === 'paid' ? 'Payment Verified' : 'Payment Awaiting Verification'}
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest truncate">
+                        {order.paymentStatus === 'paid' ? 'Payment Verified' : 'Awaiting Review'}
                       </p>
-                      <p className="text-[10px] text-emerald-600/60 font-medium">Bank Wire Transfer / Stripe Option</p>
+                      <p className="text-[10px] text-emerald-600/60 font-medium truncate">Bank Wire / Stripe</p>
                     </div>
                   </div>
 
                   {/* Payment Receipt Uploader / Viewer */}
                   {order.paymentStatus !== "paid" ? (
-                    <div className="border border-dashed border-border/40 rounded-3xl p-6 flex flex-col items-center justify-center gap-3 bg-muted/5 animate-in fade-in duration-300">
+                    <div className="border border-dashed border-border/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col items-center justify-center gap-3 bg-muted/5 animate-in fade-in duration-300">
                       {order.paymentSlipURI ? (
                         <div className="w-full flex flex-col items-center gap-2">
                           <img
@@ -181,7 +181,7 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
                     </div>
                   ) : (
                     order.paymentSlipURI && (
-                      <div className="border border-emerald-500/10 rounded-3xl p-6 flex flex-col items-center justify-center gap-2 bg-emerald-500/5 animate-in fade-in duration-300">
+                      <div className="border border-emerald-500/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col items-center justify-center gap-2 bg-emerald-500/5 animate-in fade-in duration-300">
                         <img
                           src={order.paymentSlipURI}
                           alt="Verified Payment Slip"
@@ -198,7 +198,7 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
             </div>
 
             {/* Itemized Harvest (Product List) */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <ShoppingBag className="w-3 h-3 text-primary" /> Artisanal Harvest
@@ -208,35 +208,35 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
 
               <div className="grid grid-cols-1 gap-4">
                 {order.items.map((item, i) => (
-                  <div key={i} className="group flex flex-col sm:flex-row sm:items-center justify-between p-6 rounded-[2.5rem] bg-muted/5 border border-border/20 hover:bg-muted/10 transition-all hover:border-primary/20 gap-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden border border-border/40 bg-background flex items-center justify-center">
+                  <div key={i} className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 rounded-[1.8rem] sm:rounded-[2.5rem] bg-muted/5 border border-border/20 hover:bg-muted/10 transition-all hover:border-primary/20 gap-4 sm:gap-6">
+                    <div className="flex items-center gap-4 min-w-0">
+                      <div className="w-16 h-16 rounded-2xl overflow-hidden border border-border/40 bg-background flex items-center justify-center flex-shrink-0">
                         {item.product?.imageURIs?.[0] ? (
                           <img src={item.product.imageURIs[0]} alt={item.product.productName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                         ) : (
                           <Package className="w-8 h-8 opacity-20" />
                         )}
                       </div>
-                      <div>
-                        <p className="font-bold text-heading leading-none">{item.product?.productName || "Product"}</p>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60 mt-2">Qty: {item.quantity}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-bold text-heading leading-tight truncate">{item.product?.productName || "Product"}</p>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60 mt-1.5">Qty: {item.quantity}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between sm:justify-end gap-6">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-border/20">
                       {order.status === "completed" && item.product?._id && (
                         <ReviewDialog
                           productId={item.product._id}
                           orderId={order._id}
                           productName={item.product.productName}
                         >
-                          <Button variant="outline" className="h-9 px-4 rounded-xl border-amber-500/20 text-amber-600 hover:bg-amber-500/5 hover:border-amber-500/40 text-[10px] font-black uppercase tracking-tighter gap-2">
+                          <Button variant="outline" className="h-9 px-4 rounded-xl border-amber-500/20 text-amber-600 hover:bg-amber-500/5 hover:border-amber-500/40 text-[10px] font-black uppercase tracking-tighter gap-2 flex-shrink-0">
                             <Star className="w-3 h-3 fill-amber-500" />
                             Share Chronicle
                           </Button>
                         </ReviewDialog>
                       )}
-                      <div className="text-right">
+                      <div className="text-right ml-auto sm:ml-0">
                         <p className="font-black text-primary tracking-tight">LKR {item.price.toFixed(2)}</p>
                         <p className="text-[10px] font-bold text-muted-foreground">Each</p>
                       </div>
@@ -247,7 +247,7 @@ export const UserOrderDetailsDrawer: React.FC<UserOrderDetailsDrawerProps> = ({
             </div>
           </div>
 
-          <DrawerFooter className="px-8 pb-10 pt-4 border-t border-border/40">
+          <DrawerFooter className="px-4 sm:px-8 pb-6 sm:pb-10 pt-4 border-t border-border/40">
             <Button 
               onClick={() => generateOrderPDF(order)}
               className="w-full h-14 rounded-2xl bg-foreground text-background font-black uppercase tracking-tighter shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all"

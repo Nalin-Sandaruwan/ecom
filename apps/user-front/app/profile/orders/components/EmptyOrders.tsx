@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export const EmptyOrders: React.FC = () => {
   return (
-    <div className="flex-1 min-h-[400px] flex flex-col items-center justify-center p-12 text-center border-2 border-dashed border-border/40 rounded-[3rem] bg-muted/5 mt-4 transition-all hover:bg-muted/10">
+    <div className="flex-1 min-h-[300px] sm:min-h-[400px] flex flex-col items-center justify-center p-6 sm:p-12 text-center border-2 border-dashed border-border/40 rounded-[2rem] sm:rounded-[3rem] bg-muted/5 mt-4 transition-all hover:bg-muted/10">
       <div className="relative mb-6">
         <div className="w-24 h-24 rounded-[2rem] bg-background flex items-center justify-center border border-border/40 shadow-xl">
           <PackageSearch className="w-12 h-12 text-primary/40" />

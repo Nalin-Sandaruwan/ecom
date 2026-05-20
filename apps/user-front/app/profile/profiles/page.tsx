@@ -23,9 +23,9 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="space-y-10 animate-pulse">
-        <div className="h-64 bg-muted/30 rounded-[3rem]" />
+        <div className="h-64 bg-muted/30 rounded-[1.8rem] sm:rounded-[3rem]" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-28 rounded-[2.5rem] bg-muted/20" />)}
+          {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-28 rounded-[1.8rem] sm:rounded-[2.5rem] bg-muted/20" />)}
         </div>
       </div>
     );
@@ -63,10 +63,10 @@ export default function ProfilePage() {
       </div>
 
       {/* Security Protocol */}
-      <div className="relative group overflow-hidden bg-muted/20 border border-border/20 rounded-[2.5rem] p-8 transition-all hover:bg-muted/30 shadow-inner">
+      <div className="relative group overflow-hidden bg-muted/20 border border-border/20 rounded-[1.8rem] sm:rounded-[2.5rem] p-5 sm:p-8 transition-all hover:bg-muted/30 shadow-inner">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
-        <div className="relative flex items-start gap-6">
-          <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 text-primary shadow-sm hover:rotate-6 transition-transform">
+        <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+          <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 text-primary shadow-sm hover:rotate-6 transition-transform flex-shrink-0">
             <BadgeCheck className="w-6 h-6" />
           </div>
           <div className="space-y-2">

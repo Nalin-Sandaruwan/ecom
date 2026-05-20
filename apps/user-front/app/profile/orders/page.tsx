@@ -32,14 +32,14 @@ export default function OrdersPage() {
   // Loading State
   if (isAuthLoading || (isOrdersLoading && isUser)) {
     return (
-      <div className="space-y-8 h-full flex flex-col p-8">
+      <div className="space-y-8 h-full flex flex-col">
         <div className="space-y-2">
           <Skeleton className="h-10 w-48 rounded-xl" />
           <Skeleton className="h-4 w-64 rounded-lg" />
         </div>
         <div className="space-y-6 mt-8">
           {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-32 w-full rounded-[2.5rem]" />
+            <Skeleton key={i} className="h-32 w-full rounded-[1.8rem] sm:rounded-[2.5rem]" />
           ))}
         </div>
       </div>

@@ -16,27 +16,27 @@ import { Button } from "@/components/ui/button";
 import { useLogout } from "@/lib/hooks/useAuth";
 
 const SettingRow = ({ icon: Icon, title, description, badge, destructive }: any) => (
-  <div className="flex items-center justify-between p-2 rounded-[2rem] hover:bg-muted/30 transition-all duration-300 group cursor-pointer">
-    <div className="flex items-center gap-4">
-      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border transition-colors ${destructive
+  <div className="flex items-center justify-between p-1.5 sm:p-2 rounded-[1.5rem] sm:rounded-[2rem] hover:bg-muted/30 transition-all duration-300 group cursor-pointer min-w-0 w-full gap-3">
+    <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border transition-colors flex-shrink-0 ${destructive
           ? "bg-destructive/5 border-destructive/10 text-destructive"
           : "bg-background border-border/10 text-muted-foreground group-hover:text-primary group-hover:border-primary/20"
         }`}>
         <Icon className="w-5 h-5" />
       </div>
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2">
-          <h3 className={`text-sm font-bold ${destructive ? "text-destructive" : "text-foreground"}`}>{title}</h3>
+      <div className="flex flex-col min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+          <h3 className={`text-sm font-bold truncate ${destructive ? "text-destructive" : "text-foreground"}`}>{title}</h3>
           {badge && (
-            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black uppercase tracking-tighter">
+            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black uppercase tracking-tighter flex-shrink-0">
               {badge}
             </span>
           )}
         </div>
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-xs text-muted-foreground truncate leading-snug mt-0.5">{description}</p>
       </div>
     </div>
-    <ChevronRight className={`w-4 h-4 transition-transform ${destructive ? "text-destructive/40" : "text-muted-foreground group-hover:translate-x-1 group-hover:text-primary"}`} />
+    <ChevronRight className={`w-4 h-4 flex-shrink-0 transition-transform ${destructive ? "text-destructive/40" : "text-muted-foreground group-hover:translate-x-1 group-hover:text-primary"}`} />
   </div>
 );
 
@@ -59,7 +59,7 @@ export default function SettingsPage() {
           <Lock className="w-4 h-4 text-primary" />
           <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">Security & Access</h2>
         </div>
-        <div className="bg-muted/20 border border-border/30 rounded-[2.5rem] p-3 space-y-2">
+        <div className="bg-muted/20 border border-border/30 rounded-[1.8rem] sm:rounded-[2.5rem] p-2 sm:p-3 space-y-2">
           <SettingRow
             icon={ShieldCheck}
             title="Two-Factor Authentication"
@@ -85,7 +85,7 @@ export default function SettingsPage() {
           <Bell className="w-4 h-4 text-primary" />
           <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">Preferences</h2>
         </div>
-        <div className="bg-muted/20 border border-border/30 rounded-[2.5rem] p-3 space-y-2">
+        <div className="bg-muted/20 border border-border/30 rounded-[1.8rem] sm:rounded-[2.5rem] p-2 sm:p-3 space-y-2">
           <SettingRow
             icon={Bell}
             title="Notification Settings"
@@ -106,7 +106,7 @@ export default function SettingsPage() {
           <UserX className="w-4 h-4" />
           <h2 className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">Danger Zone</h2>
         </div>
-        <div className="bg-destructive/5 border border-destructive/10 rounded-[2.5rem] p-3 space-y-2">
+        <div className="bg-destructive/5 border border-destructive/10 rounded-[1.8rem] sm:rounded-[2.5rem] p-2 sm:p-3 space-y-2">
           <div onClick={() => logout()}>
             <SettingRow
               icon={LogOut}

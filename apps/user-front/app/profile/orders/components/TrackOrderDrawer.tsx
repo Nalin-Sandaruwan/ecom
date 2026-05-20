@@ -129,7 +129,7 @@ export const TrackOrderDrawer: React.FC<TrackOrderDrawerProps> = ({
       </DrawerTrigger>
       <DrawerContent className="max-h-[85vh] bg-background">
         <div className="mx-auto w-full max-w-[500px]">
-          <DrawerHeader className="px-8 pt-8 text-left">
+          <DrawerHeader className="px-6 sm:px-8 pt-6 sm:pt-8 text-left">
              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary">
                 <Truck className="w-3 h-3" />
                 Live Logistics
@@ -152,7 +152,7 @@ export const TrackOrderDrawer: React.FC<TrackOrderDrawerProps> = ({
              </DrawerDescription>
           </DrawerHeader>
 
-          <div className="px-10 py-10">
+          <div className="overflow-y-auto max-h-[calc(85vh-12rem)] px-6 sm:px-10 pb-6 sm:pb-10 pt-2 custom-scrollbar">
             <div className="flex flex-col">
               {steps.map((step, i) => (
                 <TrackStep 

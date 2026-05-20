@@ -12,11 +12,11 @@ interface OrderCardProps {
 export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
   return (
     <div
-      className="group p-8 bg-muted/5 border border-border/40 hover:border-primary/20 rounded-[3rem] transition-all hover:shadow-2xl hover:shadow-primary/5 hover:bg-background"
+      className="group p-4 sm:p-8 bg-muted/5 border border-border/40 hover:border-primary/20 rounded-[2rem] sm:rounded-[3rem] transition-all hover:shadow-2xl hover:shadow-primary/5 hover:bg-background"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-        <div className="flex items-start gap-8 flex-1">
-          <div className="w-20 h-20 rounded-3xl bg-background border border-border/40 flex items-center justify-center text-primary overflow-hidden shadow-sm group-hover:shadow-md transition-all">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
+        <div className="flex items-start gap-4 sm:gap-8 flex-1 min-w-0">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-background border border-border/40 flex items-center justify-center text-primary overflow-hidden shadow-sm group-hover:shadow-md transition-all flex-shrink-0">
             {order.items?.[0]?.product?.imageURIs?.[0] ? (
               <img
                 src={order.items[0].product.imageURIs[0]}
@@ -28,10 +28,10 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             )}
           </div>
 
-          <div className="flex-1 space-y-4">
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <span className="text-sm font-medium">Order #{order._id.slice(-6).toUpperCase()}</span>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground border-l border-border/40 pl-6">
+          <div className="flex-1 space-y-4 min-w-0">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2">
+              <span className="text-sm font-semibold">Order #{order._id.slice(-6).toUpperCase()}</span>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-muted-foreground sm:border-l sm:border-border/40 sm:pl-6 pl-0 border-l-0">
                 <div className="flex items-center gap-2">
                   <span className="font-bold uppercase tracking-widest text-[10px] opacity-40">Payment:</span>
                   <OrderStatusBadge status={order.paymentStatus} />
@@ -64,14 +64,14 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
           </div>
         </div>
 
-        <div className="flex flex-row md:flex-col lg:flex-row items-center gap-3">
+        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
           <TrackOrderDrawer order={order}>
-            <Button variant="outline" className="flex-1 rounded-xl h-10 px-5 border-border/40 hover:bg-primary/5 hover:text-primary hover:border-primary/20 font-medium text-sm transition-all">
+            <Button variant="outline" className="w-full rounded-xl h-10 px-5 border-border/40 hover:bg-primary/5 hover:text-primary hover:border-primary/20 font-medium text-sm transition-all">
               Track Entry
             </Button>
           </TrackOrderDrawer>
           <UserOrderDetailsDrawer order={order}>
-            <Button className="flex-1 rounded-xl h-10 px-5 gap-2 font-medium text-sm shadow-xl shadow-primary/10 transition-all hover:scale-[1.02] active:scale-[0.98]">
+            <Button className="w-full rounded-xl h-10 px-5 gap-2 font-medium text-sm shadow-xl shadow-primary/10 transition-all hover:scale-[1.02] active:scale-[0.98] justify-center">
               View Details
               <ChevronRight className="w-3.5 h-3.5" />
             </Button>

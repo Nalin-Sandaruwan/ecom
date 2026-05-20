@@ -61,10 +61,10 @@ export const EditProfileDialog = ({ user, children }: EditProfileDialogProps) =>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] bg-background/80 backdrop-blur-2xl border border-border/40 rounded-[2.5rem] overflow-hidden">
+      <DialogContent className="max-w-[95vw] sm:max-w-[500px] bg-background/80 backdrop-blur-2xl border border-border/40 rounded-[1.8rem] sm:rounded-[2.5rem] overflow-hidden p-0">
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-primary/50 to-secondary" />
 
-        <DialogHeader className="p-8 pb-4">
+        <DialogHeader className="p-5 sm:p-8 pb-4">
           <DialogTitle className="text-3xl font-bold tracking-tight">
             Edit Information
           </DialogTitle>
@@ -73,7 +73,7 @@ export const EditProfileDialog = ({ user, children }: EditProfileDialogProps) =>
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="p-8 pt-0 space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-5 sm:p-8 pt-0 space-y-6">
           <div className="space-y-5">
             {/* Name Field */}
             <div className="space-y-2">
