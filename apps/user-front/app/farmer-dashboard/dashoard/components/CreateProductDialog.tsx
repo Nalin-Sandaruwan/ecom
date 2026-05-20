@@ -241,7 +241,7 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
           {/* Image Upload */}
           <div className="space-y-2">
             <Label htmlFor="images" className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground flex items-center gap-2 mb-1.5">
-              <ImageIcon className="w-3.5 h-3.5" /> Product Images (up to 2)
+              <ImageIcon className="w-3.5 h-3.5" /> Product Images (up to 4)
             </Label>
             <div className="relative group cursor-pointer">
               <input
@@ -249,7 +249,16 @@ function CreateProductDialog({ children }: { children: React.ReactNode }) {
                 id="images"
                 multiple
                 accept="image/*"
-                onChange={(e) => setSelectedImages(e.target.files)}
+                onChange={(e) => {
+                  const files = e.target.files;
+                  if (files && files.length > 4) {
+                    alert("You can select a maximum of 4 images.");
+                    e.target.value = "";
+                    setSelectedImages(null);
+                  } else {
+                    setSelectedImages(files);
+                  }
+                }}
                 className="hidden"
               />
               <Label

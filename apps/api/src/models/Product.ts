@@ -32,8 +32,8 @@ const ProductSchema: Schema = new Schema(
     imageURIs: {
       type: [String],
       validate: [
-        (val: string[]) => val.length <= 2,
-        "{PATH} exceeds the limit of 2 images",
+        (val: string[]) => val.length <= 4,
+        "{PATH} exceeds the limit of 4 images",
       ],
       default: [],
     },
