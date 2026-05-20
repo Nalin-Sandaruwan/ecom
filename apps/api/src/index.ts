@@ -44,9 +44,35 @@ const port = process.env.PORT || 5000;
  * Middleware setup
  */
 app.use(helmet()); // Security headers
+
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(",").map((o) => o.trim())
+  : ["http://localhost:3000"];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+      
+      // Direct match check
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      
+      // Dynamic www/non-www equivalence check
+      const normalizedOrigin = origin.replace(/^https?:\/\/(www\.)?/, "");
+      const isAllowed = allowedOrigins.some((allowed) => {
+        const normalizedAllowed = allowed.replace(/^https?:\/\/(www\.)?/, "");
+        return normalizedAllowed === normalizedOrigin;
+      });
+
+      if (isAllowed) {
+        return callback(null, true);
+      }
+      
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    },
     credentials: true,
   }),
 ); // Enable CORS with credentials
