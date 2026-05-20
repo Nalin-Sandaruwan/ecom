@@ -88,10 +88,9 @@ export const useCart = () => {
 
   // Unified Cart Items
   const items = useMemo(() => {
-    if (isAuthenticated) {
-      return cartData?.data?.cart?.items || [];
-    }
-    return guestItems;
+    const rawItems = isAuthenticated ? (cartData?.data?.cart?.items || []) : guestItems;
+    // Filter out items with deleted/null products to prevent application crash
+    return (rawItems || []).filter((item: any) => item && item.product && item.product._id);
   }, [isAuthenticated, cartData, guestItems]);
 
   const totalItemsCount = useMemo(() => {
@@ -164,21 +163,27 @@ export const useCart = () => {
     const mergeCarts = async () => {
       const saved = localStorage.getItem(CART_STORAGE_KEY);
       if (isAuthenticated && saved) {
-        const guestCart = JSON.parse(saved);
-        if (guestCart.length > 0) {
-          toast.loading("Syncing your guest cart...", { id: "sync-cart" });
-          for (const item of guestCart) {
-            try {
-              await addToCart(item.product._id, item.quantity);
-            } catch (e) {
-              console.error("Failed to sync item", item);
+        try {
+          const guestCart = JSON.parse(saved);
+          if (Array.isArray(guestCart) && guestCart.length > 0) {
+            toast.loading("Syncing your guest cart...", { id: "sync-cart" });
+            for (const item of guestCart) {
+              try {
+                if (item && item.product && item.product._id) {
+                  await addToCart(item.product._id, item.quantity);
+                }
+              } catch (e) {
+                console.error("Failed to sync item", item);
+              }
             }
+            localStorage.removeItem(CART_STORAGE_KEY);
+            queryClient.invalidateQueries({ queryKey: ["cart"] });
+            toast.success("Guest cart synced to your account", {
+              id: "sync-cart",
+            });
           }
-          localStorage.removeItem(CART_STORAGE_KEY);
-          queryClient.invalidateQueries({ queryKey: ["cart"] });
-          toast.success("Guest cart synced to your account", {
-            id: "sync-cart",
-          });
+        } catch (e) {
+          console.error("Failed to parse guest cart for merging", e);
         }
       }
     };

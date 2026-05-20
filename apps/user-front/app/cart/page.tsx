@@ -17,6 +17,7 @@ export default function CartPage() {
 
   const subtotal = useMemo(() => {
     return items.reduce((acc: number, item: any) => {
+      if (!item.product || typeof item.product.price !== "number") return acc;
       return acc + (item.product.price * item.quantity);
     }, 0);
   }, [items]);

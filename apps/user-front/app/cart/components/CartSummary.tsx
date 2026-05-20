@@ -111,10 +111,12 @@ export default function CartSummary({ items, subtotal, shipping, tax, total }: C
       setIsProcessing(true);
 
       // 1. Create Order
-      const orderItems = items.map(item => ({
-        product: item.product._id,
-        quantity: item.quantity
-      }));
+      const orderItems = items
+        .filter(item => item && item.product && item.product._id)
+        .map(item => ({
+          product: item.product._id,
+          quantity: item.quantity
+        }));
 
       const orderResponse = await createOrder({
         items: orderItems,

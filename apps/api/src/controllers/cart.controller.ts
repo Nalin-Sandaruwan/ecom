@@ -21,6 +21,13 @@ export const getCart = catchAsync(async (req: Request, res: Response, next: Next
   if (!cart) {
     // Create an empty cart if it doesn't exist
     cart = await Cart.create({ userId: req.user?._id, items: [] });
+  } else if (cart.items && cart.items.length > 0) {
+    // Automatically clean up deleted/null products from cart
+    const originalLength = cart.items.length;
+    cart.items = cart.items.filter((item: any) => item.product !== null);
+    if (cart.items.length !== originalLength) {
+      await cart.save();
+    }
   }
 
   res.status(200).json({
@@ -77,6 +84,14 @@ export const addToCart = catchAsync(async (req: Request, res: Response, next: Ne
     select: "productName price imageURIs productType quantity"
   });
 
+  if (cart.items && cart.items.length > 0) {
+    const originalLength = cart.items.length;
+    cart.items = cart.items.filter((item: any) => item.product !== null);
+    if (cart.items.length !== originalLength) {
+      await cart.save();
+    }
+  }
+
   res.status(200).json({
     status: "success",
     data: {
@@ -120,6 +135,14 @@ export const updateCartItem = catchAsync(async (req: Request, res: Response, nex
     select: "productName price imageURIs productType quantity"
   });
 
+  if (cart.items && cart.items.length > 0) {
+    const originalLength = cart.items.length;
+    cart.items = cart.items.filter((item: any) => item.product !== null);
+    if (cart.items.length !== originalLength) {
+      await cart.save();
+    }
+  }
+
   res.status(200).json({
     status: "success",
     data: {
@@ -146,6 +169,14 @@ export const removeFromCart = catchAsync(async (req: Request, res: Response, nex
     path: "items.product",
     select: "productName price imageURIs productType quantity"
   });
+
+  if (cart.items && cart.items.length > 0) {
+    const originalLength = cart.items.length;
+    cart.items = cart.items.filter((item: any) => item.product !== null);
+    if (cart.items.length !== originalLength) {
+      await cart.save();
+    }
+  }
 
   res.status(200).json({
     status: "success",
