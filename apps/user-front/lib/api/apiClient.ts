@@ -2,7 +2,7 @@ import axios from "axios";
 
 const isProd = process.env.NODE_ENV === "production";
 const defaultAPIUrl = isProd
-  ? "http://127.0.0.1:5000/api/v1"
+  ? "https://api.woodengallery.studio/api/v1"
   : "http://localhost:5000/api/v1";
 
 // Create a globally configured Axios instance
