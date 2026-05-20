@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  generateBuildId: async () => {
+    // Return a stable build ID to prevent deployment version skew mismatches
+    return "woodengallery-production";
+  },
   images: {
     remotePatterns: [
       {

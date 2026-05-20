@@ -26,6 +26,7 @@ jobs:
       - name: 🏗️ Build Monorepo (Next.js & Express API)
         env:
           NEXT_PUBLIC_API_URL: http://${{ secrets.VPS_IP }}/api/v1
+          NEXT_SERVER_ACTIONS_ENCRYPTION_KEY: ${{ secrets.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY }}
         run: npm run build
 
       - name: ⚙️ Prepare Next.js Standalone Assets
