@@ -145,11 +145,11 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-background flex flex-col">
+      <div className="min-h-screen bg-background flex flex-col pt-24">
         <Navbar />
 
         {/* Mobile Navigation Bar */}
-        <div className="lg:hidden sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-border/40 px-6 py-4 flex items-center justify-between pt-24">
+        <div className="lg:hidden sticky top-24 z-40 w-full bg-background/80 backdrop-blur-md border-b border-border/40 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
               <User className="w-5 h-5 text-primary" />
@@ -177,7 +177,7 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
         </div>
 
         <div className="flex-1 w-full max-w-[1600px] mx-auto relative">
-          <div className="flex gap-8 p-6 lg:p-8 pt-6 lg:pt-24 min-h-full">
+          <div className="flex gap-8 p-4 sm:p-6 lg:p-8 pt-4 lg:pt-6 min-h-full">
             {/* Desktop Fixed Sidebar */}
             <aside className="hidden lg:flex w-72 flex-col fixed h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-12 custom-scrollbar">
               <SidebarContent
@@ -189,7 +189,7 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
 
             {/* Main Content Area */}
             <main className="flex-1 lg:ml-80 w-full">
-              <div className="bg-background/50 border border-border/40 rounded-[2.5rem] p-6 lg:p-10 min-h-[calc(100vh-12rem)] shadow-sm">
+              <div className="bg-background/50 border border-border/40 rounded-[1.8rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-10 min-h-[calc(100vh-12rem)] shadow-sm">
                 {children}
               </div>
             </main>
