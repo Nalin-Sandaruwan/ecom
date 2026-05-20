@@ -64,7 +64,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+        <div className="flex flex-col md:flex-col lg:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
           <TrackOrderDrawer order={order}>
             <Button variant="outline" className="w-full rounded-xl h-10 px-5 border-border/40 hover:bg-primary/5 hover:text-primary hover:border-primary/20 font-medium text-sm transition-all">
               Track Entry
